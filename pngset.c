@@ -583,7 +583,11 @@ png_set_PLTE(png_structrp png_ptr, png_inforp info_ptr,
    max_palette_length = (info_ptr->color_type == PNG_COLOR_TYPE_PALETTE) ?
       (1 << info_ptr->bit_depth) : PNG_MAX_PALETTE_LENGTH;
 
+#ifdef MAGMA_ENABLE_FIXES
    if (num_palette < 0 || num_palette > (int) max_palette_length)
+#else
+   if (num_palette < 0 || num_palette > PNG_MAX_PALETTE_LENGTH)
+#endif
    {
       if (info_ptr->color_type == PNG_COLOR_TYPE_PALETTE)
          png_error(png_ptr, "Invalid palette length");
@@ -603,7 +607,12 @@ png_set_PLTE(png_structrp png_ptr, png_inforp info_ptr,
 #        endif
       ))
    {
+#ifdef MAGMA_ENABLE_FIXES
       png_error(png_ptr, "Invalid palette");
+#else
+      png_chunk_report(png_ptr, "Invalid palette", PNG_CHUNK_ERROR);
+      return;
+#endif
    }
 
    /* It may not actually be necessary to set png_ptr->palette here;

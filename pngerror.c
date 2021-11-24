@@ -951,6 +951,13 @@ png_safe_execute(png_imagep image_in, int (*function)(png_voidp), png_voidp arg)
       result = function(arg);
    }
 
+#ifdef MAGMA_PNG002_CANARIES
+   MAGMA_LOG("PNG002", 0);
+#endif
+#ifdef MAGMA_ENABLE_CANARIES
+   MAGMA_LOG("PNG002", (image->flags & PNG_IMAGE_FLAG_INVALID) != 0);
+#endif
+
    image->opaque->error_buf = saved_error_buf;
 
    /* And do the cleanup prior to any failure return. */

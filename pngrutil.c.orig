@@ -983,17 +983,8 @@ png_handle_PLTE(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
    else
       max_palette_length = PNG_MAX_PALETTE_LENGTH;
 
-#ifdef MAGMA_ENABLE_FIXES
    if (num > max_palette_length)
       num = max_palette_length;
-#endif
-
-#ifdef MAGMA_PNG003_CANARIES
-   MAGMA_LOG("PNG003", 0);
-#endif
-#ifdef MAGMA_ENABLE_CANARIES
-   MAGMA_LOG("PNG003", num > max_palette_length);
-#endif
 
 #ifdef PNG_POINTER_INDEXING_SUPPORTED
    for (i = 0, pal_ptr = palette; i < num; i++, pal_ptr++)

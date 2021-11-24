@@ -616,12 +616,6 @@ png_free_data(png_const_structrp png_ptr, png_inforp info_ptr, png_uint_32 mask,
 #endif
 
 #ifdef PNG_eXIf_SUPPORTED
-#ifdef MAGMA_PNG006_CANARIES
-   MAGMA_LOG("PNG006", 0);
-#endif
-#ifdef MAGMA_ENABLE_CANARIES
-   MAGMA_LOG("PNG006", MAGMA_AND(info_ptr->eXIf_buf != NULL, (mask & info_ptr->free_me & PNG_FREE_EXIF) == 0));
-#endif
    /* Free any eXIf entry */
    if (((mask & PNG_FREE_EXIF) & info_ptr->free_me) != 0)
    {
@@ -4582,11 +4576,6 @@ png_image_free_function(png_voidp argument)
 #     endif
    }
 
-#ifdef MAGMA_ENABLE_FIXES
-#else
-   image->flags |= PNG_IMAGE_FLAG_INVALID;
-#endif
-
    /* Success. */
    return 1;
 }
@@ -4601,11 +4590,7 @@ png_image_free(png_imagep image)
    if (image != NULL && image->opaque != NULL &&
       image->opaque->error_buf == NULL)
    {
-#ifdef MAGMA_ENABLE_FIXES
       png_image_free_function(image);
-#else
-      (void)png_safe_execute(image, png_image_free_function, image);
-#endif
       image->opaque = NULL;
    }
 }

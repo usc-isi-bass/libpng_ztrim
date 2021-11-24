@@ -1959,8 +1959,16 @@ png_read_transform_info(png_structrp png_ptr, png_inforp info_ptr)
          info_ptr->bit_depth = 8;
          info_ptr->num_trans = 0;
 
+#ifdef MAGMA_ENABLE_FIXES
          if (png_ptr->palette == NULL)
             png_error (png_ptr, "Palette is NULL in indexed image");
+#endif
+#ifdef MAGMA_PNG007_CANARIES
+         MAGMA_LOG("PNG007", png_ptr->palette == NULL);
+#endif
+#ifdef MAGMA_ENABLE_CANARIES
+         MAGMA_LOG("PNG007", png_ptr->palette == NULL);
+#endif
       }
       else
       {

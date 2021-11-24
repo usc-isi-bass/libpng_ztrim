@@ -2969,6 +2969,14 @@ typedef struct
     * because that call initializes the 'flags' field.
     */
 
+#ifdef MAGMA_ENABLE_FIXES
+#else
+#define PNG_IMAGE_FLAG_INVALID 0x08
+   /* This indicates that the image and all its allocated resources have been
+       * freed or released and are not available for consumption.
+    */
+#endif
+
 #ifdef PNG_SIMPLIFIED_READ_SUPPORTED
 /* READ APIs
  * ---------
