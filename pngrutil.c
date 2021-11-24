@@ -1,3 +1,7 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
 
 /* pngrutil.c - utilities to read a PNG file
  *
@@ -986,6 +990,10 @@ png_handle_PLTE(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 #ifdef MAGMA_ENABLE_FIXES
    if (num > max_palette_length)
       num = max_palette_length;
+#endif
+
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(0);
 #endif
 
 #ifdef MAGMA_PNG003_CANARIES
