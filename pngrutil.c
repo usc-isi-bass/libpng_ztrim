@@ -3488,6 +3488,9 @@ png_combine_row(png_const_structrp png_ptr, png_bytep dp, int display)
 #ifdef MAGMA_ENABLE_CANARIES
          MAGMA_LOG("PNG004", (row_width * pixel_depth) != (u_int64_t)row_width * pixel_depth);
 #endif
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(0);
+#endif
          row_width *= pixel_depth;
 
          /* Regardless of pass number the Adam 7 interlace always results in a
