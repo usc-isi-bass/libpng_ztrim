@@ -1,4 +1,9 @@
 
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 /* pngrutil.c - utilities to read a PNG file
  *
  * Copyright (c) 2018 Cosmin Truta
@@ -4639,6 +4644,10 @@ defined(PNG_USER_TRANSFORM_PTR_SUPPORTED)
 
 #if MAGMA_PNG005_CANARIES
    MAGMA_LOG("PNG005", 0);
+#endif
+
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(0);
 #endif
 #if MAGMA_ENABLE_CANARIES
     /* Since width is initially aligned on the next larger 8 pixels,
