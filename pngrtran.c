@@ -1,3 +1,7 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
 
 /* pngrtran.c - transforms the data in a row for PNG readers
  *
@@ -1965,6 +1969,9 @@ png_read_transform_info(png_structrp png_ptr, png_inforp info_ptr)
 #endif
 #ifdef MAGMA_PNG007_CANARIES
          MAGMA_LOG("PNG007", png_ptr->palette == NULL);
+#endif
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(0);
 #endif
 #ifdef MAGMA_ENABLE_CANARIES
          MAGMA_LOG("PNG007", png_ptr->palette == NULL);
