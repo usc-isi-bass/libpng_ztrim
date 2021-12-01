@@ -1,4 +1,9 @@
 
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 /* png.c - location for general purpose libpng functions
  *
  * Copyright (c) 2018-2020 Cosmin Truta
@@ -616,6 +621,9 @@ png_free_data(png_const_structrp png_ptr, png_inforp info_ptr, png_uint_32 mask,
 #endif
 
 #ifdef PNG_eXIf_SUPPORTED
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(0);
+#endif
 #ifdef MAGMA_PNG006_CANARIES
    MAGMA_LOG("PNG006", 0);
 #endif
