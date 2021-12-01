@@ -20,6 +20,11 @@
 #include <stdint.h>
 #include <string.h>
 
+#ifndef ZTRIM_DONT_INSTR
+#include <libztrim.h>
+#endif
+
+
 #include <vector>
 
 #define PNG_INTERNAL
@@ -101,6 +106,10 @@ static const int kPngHeaderSize = 8;
 // Roughly follows the libpng book example:
 // http://www.libpng.org/pub/png/book/chapter13.html
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
+
+#ifndef ZTRIM_DONT_INSTR
+    ztrim_initIteration(1000);
+#endif
   if (size < kPngHeaderSize) {
     return 0;
   }
