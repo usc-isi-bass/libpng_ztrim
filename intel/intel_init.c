@@ -1,3 +1,8 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 
 /* intel_init.c - SSE2 optimized filter functions
  *
@@ -19,6 +24,9 @@
 void
 png_init_filter_functions_sse2(png_structp pp, unsigned int bpp)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(341);
+#endif
    /* The techniques used to implement each of these filters in SSE operate on
     * one pixel at a time.
     * So they generally speed up 3bpp images about 3x, 4bpp images about 4x.

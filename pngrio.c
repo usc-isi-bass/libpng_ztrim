@@ -1,3 +1,8 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 
 /* pngrio.c - functions for data input
  *
@@ -31,6 +36,9 @@
 void /* PRIVATE */
 png_read_data(png_structrp png_ptr, png_bytep data, size_t length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(331);
+#endif
    png_debug1(4, "reading %d bytes", (int)length);
 
    if (png_ptr->read_data_fn != NULL)
@@ -49,6 +57,9 @@ png_read_data(png_structrp png_ptr, png_bytep data, size_t length)
 void PNGCBAPI
 png_default_read_data(png_structp png_ptr, png_bytep data, size_t length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(332);
+#endif
    size_t check;
 
    if (png_ptr == NULL)
@@ -87,6 +98,9 @@ void PNGAPI
 png_set_read_fn(png_structrp png_ptr, png_voidp io_ptr,
     png_rw_ptr read_data_fn)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(333);
+#endif
    if (png_ptr == NULL)
       return;
 

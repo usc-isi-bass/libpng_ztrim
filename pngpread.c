@@ -1,3 +1,8 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 
 /* pngpread.c - read a png file in push mode
  *
@@ -36,6 +41,9 @@ void PNGAPI
 png_process_data(png_structrp png_ptr, png_inforp info_ptr,
     png_bytep buffer, size_t buffer_size)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(282);
+#endif
    if (png_ptr == NULL || info_ptr == NULL)
       return;
 
@@ -50,6 +58,9 @@ png_process_data(png_structrp png_ptr, png_inforp info_ptr,
 size_t PNGAPI
 png_process_data_pause(png_structrp png_ptr, int save)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(283);
+#endif
    if (png_ptr != NULL)
    {
       /* It's easiest for the caller if we do the save; then the caller doesn't
@@ -77,6 +88,9 @@ png_process_data_pause(png_structrp png_ptr, int save)
 png_uint_32 PNGAPI
 png_process_data_skip(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(284);
+#endif
 /* TODO: Deprecate and remove this API.
  * Somewhere the implementation of this seems to have been lost,
  * or abandoned.  It was only to support some internal back-door access
@@ -93,6 +107,9 @@ png_process_data_skip(png_structrp png_ptr)
 void /* PRIVATE */
 png_process_some_data(png_structrp png_ptr, png_inforp info_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(285);
+#endif
    if (png_ptr == NULL)
       return;
 
@@ -133,6 +150,9 @@ png_process_some_data(png_structrp png_ptr, png_inforp info_ptr)
 void /* PRIVATE */
 png_push_read_sig(png_structrp png_ptr, png_inforp info_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(286);
+#endif
    size_t num_checked = png_ptr->sig_bytes; /* SAFE, does not exceed 8 */
    size_t num_to_check = 8 - num_checked;
 
@@ -166,6 +186,9 @@ png_push_read_sig(png_structrp png_ptr, png_inforp info_ptr)
 void /* PRIVATE */
 png_push_read_chunk(png_structrp png_ptr, png_inforp info_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(287);
+#endif
    png_uint_32 chunk_name;
 #ifdef PNG_HANDLE_AS_UNKNOWN_SUPPORTED
    int keep; /* unknown handling method */
@@ -420,6 +443,9 @@ png_push_read_chunk(png_structrp png_ptr, png_inforp info_ptr)
 void PNGCBAPI
 png_push_fill_buffer(png_structp png_ptr, png_bytep buffer, size_t length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(288);
+#endif
    png_bytep ptr;
 
    if (png_ptr == NULL)
@@ -463,6 +489,9 @@ png_push_fill_buffer(png_structp png_ptr, png_bytep buffer, size_t length)
 void /* PRIVATE */
 png_push_save_buffer(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(289);
+#endif
    if (png_ptr->save_buffer_size != 0)
    {
       if (png_ptr->save_buffer_ptr != png_ptr->save_buffer)
@@ -533,6 +562,9 @@ png_push_restore_buffer(png_structrp png_ptr, png_bytep buffer,
 void /* PRIVATE */
 png_push_read_IDAT(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(290);
+#endif
    if ((png_ptr->mode & PNG_HAVE_CHUNK_HEADER) == 0)
    {
       png_byte chunk_length[4];
@@ -627,6 +659,9 @@ void /* PRIVATE */
 png_process_IDAT_data(png_structrp png_ptr, png_bytep buffer,
     size_t buffer_length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(291);
+#endif
    /* The caller checks for a non-zero buffer length. */
    if (!(buffer_length > 0) || buffer == NULL)
       png_error(png_ptr, "No IDAT data (internal error)");
@@ -738,6 +773,9 @@ png_process_IDAT_data(png_structrp png_ptr, png_bytep buffer,
 void /* PRIVATE */
 png_push_process_row(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(292);
+#endif
    /* 1.5.6: row_info moved out of png_struct to a local here. */
    png_row_info row_info;
 
@@ -968,6 +1006,9 @@ png_push_process_row(png_structrp png_ptr)
 void /* PRIVATE */
 png_read_push_finish_row(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(293);
+#endif
 #ifdef PNG_READ_INTERLACING_SUPPORTED
    /* Arrays to facilitate easy interlacing - use pass (0 - 6) as index */
 
@@ -1058,6 +1099,9 @@ void PNGAPI
 png_progressive_combine_row(png_const_structrp png_ptr, png_bytep old_row,
     png_const_bytep new_row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(294);
+#endif
    if (png_ptr == NULL)
       return;
 
@@ -1075,6 +1119,9 @@ png_set_progressive_read_fn(png_structrp png_ptr, png_voidp progressive_ptr,
     png_progressive_info_ptr info_fn, png_progressive_row_ptr row_fn,
     png_progressive_end_ptr end_fn)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(295);
+#endif
    if (png_ptr == NULL)
       return;
 

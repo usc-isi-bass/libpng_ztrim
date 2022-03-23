@@ -1,3 +1,8 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 
 /* pngtrans.c - transforms the data in a row (used by both readers and writers)
  *
@@ -34,6 +39,9 @@ png_set_bgr(png_structrp png_ptr)
 void PNGAPI
 png_set_swap(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(222);
+#endif
    png_debug(1, "in png_set_swap");
 
    if (png_ptr == NULL)
@@ -49,6 +57,9 @@ png_set_swap(png_structrp png_ptr)
 void PNGAPI
 png_set_packing(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(223);
+#endif
    png_debug(1, "in png_set_packing");
 
    if (png_ptr == NULL)
@@ -69,6 +80,9 @@ png_set_packing(png_structrp png_ptr)
 void PNGAPI
 png_set_packswap(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(224);
+#endif
    png_debug(1, "in png_set_packswap");
 
    if (png_ptr == NULL)
@@ -83,6 +97,9 @@ png_set_packswap(png_structrp png_ptr)
 void PNGAPI
 png_set_shift(png_structrp png_ptr, png_const_color_8p true_bits)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(225);
+#endif
    png_debug(1, "in png_set_shift");
 
    if (png_ptr == NULL)
@@ -98,6 +115,9 @@ png_set_shift(png_structrp png_ptr, png_const_color_8p true_bits)
 int PNGAPI
 png_set_interlace_handling(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(226);
+#endif
    png_debug(1, "in png_set_interlace handling");
 
    if (png_ptr != 0 && png_ptr->interlaced != 0)
@@ -119,6 +139,9 @@ png_set_interlace_handling(png_structrp png_ptr)
 void PNGAPI
 png_set_filler(png_structrp png_ptr, png_uint_32 filler, int filler_loc)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(227);
+#endif
    png_debug(1, "in png_set_filler");
 
    if (png_ptr == NULL)
@@ -204,6 +227,9 @@ png_set_filler(png_structrp png_ptr, png_uint_32 filler, int filler_loc)
 void PNGAPI
 png_set_add_alpha(png_structrp png_ptr, png_uint_32 filler, int filler_loc)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(228);
+#endif
    png_debug(1, "in png_set_add_alpha");
 
    if (png_ptr == NULL)
@@ -261,6 +287,9 @@ png_set_invert_mono(png_structrp png_ptr)
 void /* PRIVATE */
 png_do_invert(png_row_infop row_info, png_bytep row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(229);
+#endif
    png_debug(1, "in png_do_invert");
 
   /* This test removed from libpng version 1.0.13 and 1.2.0:
@@ -318,6 +347,9 @@ png_do_invert(png_row_infop row_info, png_bytep row)
 void /* PRIVATE */
 png_do_swap(png_row_infop row_info, png_bytep row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(230);
+#endif
    png_debug(1, "in png_do_swap");
 
    if (row_info->bit_depth == 16)
@@ -454,6 +486,9 @@ static const png_byte fourbppswaptable[256] = {
 void /* PRIVATE */
 png_do_packswap(png_row_infop row_info, png_bytep row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(231);
+#endif
    png_debug(1, "in png_do_packswap");
 
    if (row_info->bit_depth < 8)
@@ -494,6 +529,9 @@ png_do_packswap(png_row_infop row_info, png_bytep row)
 void /* PRIVATE */
 png_do_strip_channel(png_row_infop row_info, png_bytep row, int at_start)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(232);
+#endif
    png_bytep sp = row; /* source pointer */
    png_bytep dp = row; /* destination pointer */
    png_bytep ep = row + row_info->rowbytes; /* One beyond end of row */
@@ -618,6 +656,9 @@ png_do_strip_channel(png_row_infop row_info, png_bytep row, int at_start)
 void /* PRIVATE */
 png_do_bgr(png_row_infop row_info, png_bytep row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(233);
+#endif
    png_debug(1, "in png_do_bgr");
 
    if ((row_info->color_type & PNG_COLOR_MASK_COLOR) != 0)
@@ -698,6 +739,9 @@ png_do_bgr(png_row_infop row_info, png_bytep row)
 void /* PRIVATE */
 png_do_check_palette_indexes(png_structrp png_ptr, png_row_infop row_info)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(234);
+#endif
    if (png_ptr->num_palette < (1 << row_info->bit_depth) &&
       png_ptr->num_palette > 0) /* num_palette can be 0 in MNG files */
    {
@@ -802,6 +846,9 @@ void PNGAPI
 png_set_user_transform_info(png_structrp png_ptr, png_voidp
    user_transform_ptr, int user_transform_depth, int user_transform_channels)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(235);
+#endif
    png_debug(1, "in png_set_user_transform_info");
 
    if (png_ptr == NULL)
@@ -843,6 +890,9 @@ png_get_user_transform_ptr(png_const_structrp png_ptr)
 png_uint_32 PNGAPI
 png_get_current_row_number(png_const_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(236);
+#endif
    /* See the comments in png.h - this is the sub-image row when reading an
     * interlaced image.
     */

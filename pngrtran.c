@@ -1,3 +1,8 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 
 /* pngrtran.c - transforms the data in a row for PNG readers
  *
@@ -35,6 +40,9 @@
 void PNGAPI
 png_set_crc_action(png_structrp png_ptr, int crit_action, int ancil_action)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(71);
+#endif
    png_debug(1, "in png_set_crc_action");
 
    if (png_ptr == NULL)
@@ -109,6 +117,9 @@ png_set_crc_action(png_structrp png_ptr, int crit_action, int ancil_action)
 static int
 png_rtran_ok(png_structrp png_ptr, int need_IHDR)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(72);
+#endif
    if (png_ptr != NULL)
    {
       if ((png_ptr->flags & PNG_FLAG_ROW_INIT) != 0)
@@ -138,6 +149,9 @@ png_set_background_fixed(png_structrp png_ptr,
     png_const_color_16p background_color, int background_gamma_code,
     int need_expand, png_fixed_point background_gamma)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(73);
+#endif
    png_debug(1, "in png_set_background_fixed");
 
    if (png_rtran_ok(png_ptr, 0) == 0 || background_color == NULL)
@@ -223,6 +237,9 @@ static png_fixed_point
 translate_gamma_flags(png_structrp png_ptr, png_fixed_point output_gamma,
     int is_screen)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(74);
+#endif
    /* Check for flag values.  The main reason for having the old Mac value as a
     * flag is that it is pretty near impossible to work out what the correct
     * value is from Apple documentation - a working Mac system is needed to
@@ -261,6 +278,9 @@ translate_gamma_flags(png_structrp png_ptr, png_fixed_point output_gamma,
 static png_fixed_point
 convert_gamma_value(png_structrp png_ptr, double output_gamma)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(75);
+#endif
    /* The following silently ignores cases where fixed point (times 100,000)
     * gamma values are passed to the floating point API.  This is safe and it
     * means the fixed point constants work just fine with the floating point
@@ -287,6 +307,9 @@ void PNGFAPI
 png_set_alpha_mode_fixed(png_structrp png_ptr, int mode,
     png_fixed_point output_gamma)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(76);
+#endif
    int compose = 0;
    png_fixed_point file_gamma;
 
@@ -429,6 +452,9 @@ png_set_quantize(png_structrp png_ptr, png_colorp palette,
     int num_palette, int maximum_colors, png_const_uint_16p histogram,
     int full_quantize)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(77);
+#endif
    png_debug(1, "in png_set_quantize");
 
    if (png_rtran_ok(png_ptr, 0) == 0)
@@ -818,6 +844,9 @@ void PNGFAPI
 png_set_gamma_fixed(png_structrp png_ptr, png_fixed_point scrn_gamma,
     png_fixed_point file_gamma)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(78);
+#endif
    png_debug(1, "in png_set_gamma_fixed");
 
    if (png_rtran_ok(png_ptr, 0) == 0)
@@ -954,6 +983,9 @@ png_set_expand_16(png_structrp png_ptr)
 void PNGAPI
 png_set_gray_to_rgb(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(79);
+#endif
    png_debug(1, "in png_set_gray_to_rgb");
 
    if (png_rtran_ok(png_ptr, 0) == 0)
@@ -970,6 +1002,9 @@ void PNGFAPI
 png_set_rgb_to_gray_fixed(png_structrp png_ptr, int error_action,
     png_fixed_point red, png_fixed_point green)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(80);
+#endif
    png_debug(1, "in png_set_rgb_to_gray");
 
    /* Need the IHDR here because of the check on color_type below. */
@@ -1091,6 +1126,9 @@ png_set_read_user_transform_fn(png_structrp png_ptr, png_user_transform_ptr
 static int /* PRIVATE */
 png_gamma_threshold(png_fixed_point screen_gamma, png_fixed_point file_gamma)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(81);
+#endif
    /* PNG_GAMMA_THRESHOLD is the threshold for performing gamma
     * correction as a difference of the overall transform from 1.0
     *
@@ -1116,6 +1154,9 @@ png_gamma_threshold(png_fixed_point screen_gamma, png_fixed_point file_gamma)
 static void /* PRIVATE */
 png_init_palette_transformations(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(82);
+#endif
    /* Called to handle the (input) palette case.  In png_do_read_transformations
     * the first step is to expand the palette if requested, so this code must
     * take care to only make changes that are invariant with respect to the
@@ -1205,6 +1246,9 @@ png_init_palette_transformations(png_structrp png_ptr)
 static void /* PRIVATE */
 png_init_rgb_transformations(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(83);
+#endif
    /* Added to libpng-1.5.4: check the color type to determine whether there
     * is any alpha or transparency in the image and simply cancel the
     * background and alpha mode stuff if there isn't.
@@ -1290,6 +1334,9 @@ png_init_rgb_transformations(png_structrp png_ptr)
 void /* PRIVATE */
 png_init_read_transformations(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(84);
+#endif
    png_debug(1, "in png_init_read_transformations");
 
    /* This internal function is called from png_read_start_row in pngrutil.c
@@ -1939,6 +1986,9 @@ png_init_read_transformations(png_structrp png_ptr)
 void /* PRIVATE */
 png_read_transform_info(png_structrp png_ptr, png_inforp info_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(85);
+#endif
    png_debug(1, "in png_read_transform_info");
 
 #ifdef PNG_READ_EXPAND_SUPPORTED
@@ -2159,6 +2209,9 @@ defined(PNG_READ_USER_TRANSFORM_SUPPORTED)
 static void
 png_do_unpack(png_row_infop row_info, png_bytep row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(86);
+#endif
    png_debug(1, "in png_do_unpack");
 
    if (row_info->bit_depth < 8)
@@ -2258,6 +2311,9 @@ static void
 png_do_unshift(png_row_infop row_info, png_bytep row,
     png_const_color_8p sig_bits)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(87);
+#endif
    int color_type;
 
    png_debug(1, "in png_do_unshift");
@@ -2396,6 +2452,9 @@ png_do_unshift(png_row_infop row_info, png_bytep row,
 static void
 png_do_scale_16_to_8(png_row_infop row_info, png_bytep row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(88);
+#endif
    png_debug(1, "in png_do_scale_16_to_8");
 
    if (row_info->bit_depth == 16)
@@ -2457,6 +2516,9 @@ static void
  */
 png_do_chop(png_row_infop row_info, png_bytep row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(89);
+#endif
    png_debug(1, "in png_do_chop");
 
    if (row_info->bit_depth == 16)
@@ -2482,6 +2544,9 @@ png_do_chop(png_row_infop row_info, png_bytep row)
 static void
 png_do_read_swap_alpha(png_row_infop row_info, png_bytep row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(90);
+#endif
    png_uint_32 row_width = row_info->width;
 
    png_debug(1, "in png_do_read_swap_alpha");
@@ -2578,6 +2643,9 @@ png_do_read_swap_alpha(png_row_infop row_info, png_bytep row)
 static void
 png_do_read_invert_alpha(png_row_infop row_info, png_bytep row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(91);
+#endif
    png_uint_32 row_width;
    png_debug(1, "in png_do_read_invert_alpha");
 
@@ -2681,6 +2749,9 @@ static void
 png_do_read_filler(png_row_infop row_info, png_bytep row,
     png_uint_32 filler, png_uint_32 flags)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(92);
+#endif
    png_uint_32 i;
    png_uint_32 row_width = row_info->width;
 
@@ -2867,6 +2938,9 @@ png_do_read_filler(png_row_infop row_info, png_bytep row,
 static void
 png_do_gray_to_rgb(png_row_infop row_info, png_bytep row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(93);
+#endif
    png_uint_32 i;
    png_uint_32 row_width = row_info->width;
 
@@ -3006,6 +3080,9 @@ png_do_gray_to_rgb(png_row_infop row_info, png_bytep row)
 static int
 png_do_rgb_to_gray(png_structrp png_ptr, png_row_infop row_info, png_bytep row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(94);
+#endif
    int rgb_error = 0;
 
    png_debug(1, "in png_do_rgb_to_gray");
@@ -3207,6 +3284,9 @@ png_do_rgb_to_gray(png_structrp png_ptr, png_row_infop row_info, png_bytep row)
 static void
 png_do_compose(png_row_infop row_info, png_bytep row, png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(95);
+#endif
 #ifdef PNG_READ_GAMMA_SUPPORTED
    png_const_bytep gamma_table = png_ptr->gamma_table;
    png_const_bytep gamma_from_1 = png_ptr->gamma_from_1;
@@ -3951,6 +4031,9 @@ png_do_compose(png_row_infop row_info, png_bytep row, png_structrp png_ptr)
 static void
 png_do_gamma(png_row_infop row_info, png_bytep row, png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(96);
+#endif
    png_const_bytep gamma_table = png_ptr->gamma_table;
    png_const_uint_16pp gamma_16_table = png_ptr->gamma_16_table;
    int gamma_shift = png_ptr->gamma_shift;
@@ -4152,6 +4235,9 @@ png_do_gamma(png_row_infop row_info, png_bytep row, png_structrp png_ptr)
 static void
 png_do_encode_alpha(png_row_infop row_info, png_bytep row, png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(97);
+#endif
    png_uint_32 row_width = row_info->width;
 
    png_debug(1, "in png_do_encode_alpha");
@@ -4218,6 +4304,9 @@ png_do_expand_palette(png_structrp png_ptr, png_row_infop row_info,
     png_bytep row, png_const_colorp palette, png_const_bytep trans_alpha,
     int num_trans)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(98);
+#endif
    int shift, value;
    png_bytep sp, dp;
    png_uint_32 i;
@@ -4391,6 +4480,9 @@ static void
 png_do_expand(png_row_infop row_info, png_bytep row,
     png_const_color_16p trans_color)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(99);
+#endif
    int shift, value;
    png_bytep sp, dp;
    png_uint_32 i;
@@ -4620,6 +4712,9 @@ png_do_expand(png_row_infop row_info, png_bytep row,
 static void
 png_do_expand_16(png_row_infop row_info, png_bytep row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(100);
+#endif
    if (row_info->bit_depth == 8 &&
       row_info->color_type != PNG_COLOR_TYPE_PALETTE)
    {
@@ -4651,6 +4746,9 @@ static void
 png_do_quantize(png_row_infop row_info, png_bytep row,
     png_const_bytep palette_lookup, png_const_bytep quantize_lookup)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(101);
+#endif
    png_bytep sp, dp;
    png_uint_32 i;
    png_uint_32 row_width=row_info->width;
@@ -4747,6 +4845,9 @@ png_do_quantize(png_row_infop row_info, png_bytep row,
 void /* PRIVATE */
 png_do_read_transformations(png_structrp png_ptr, png_row_infop row_info)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(102);
+#endif
    png_debug(1, "in png_do_read_transformations");
 
    if (png_ptr->row_buf == NULL)

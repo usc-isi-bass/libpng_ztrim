@@ -1,3 +1,8 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 
 /* pngget.c - retrieval of values from info struct
  *
@@ -115,6 +120,9 @@ png_uint_32 PNGAPI
 png_get_x_pixels_per_meter(png_const_structrp png_ptr, png_const_inforp
    info_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(181);
+#endif
 #ifdef PNG_pHYs_SUPPORTED
    if (png_ptr != NULL && info_ptr != NULL &&
        (info_ptr->valid & PNG_INFO_pHYs) != 0)
@@ -137,6 +145,9 @@ png_uint_32 PNGAPI
 png_get_y_pixels_per_meter(png_const_structrp png_ptr, png_const_inforp
     info_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(182);
+#endif
 #ifdef PNG_pHYs_SUPPORTED
    if (png_ptr != NULL && info_ptr != NULL &&
        (info_ptr->valid & PNG_INFO_pHYs) != 0)
@@ -158,6 +169,9 @@ png_get_y_pixels_per_meter(png_const_structrp png_ptr, png_const_inforp
 png_uint_32 PNGAPI
 png_get_pixels_per_meter(png_const_structrp png_ptr, png_const_inforp info_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(183);
+#endif
 #ifdef PNG_pHYs_SUPPORTED
    if (png_ptr != NULL && info_ptr != NULL &&
        (info_ptr->valid & PNG_INFO_pHYs) != 0)
@@ -181,6 +195,9 @@ float PNGAPI
 png_get_pixel_aspect_ratio(png_const_structrp png_ptr, png_const_inforp
    info_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(184);
+#endif
 #ifdef PNG_READ_pHYs_SUPPORTED
    if (png_ptr != NULL && info_ptr != NULL &&
        (info_ptr->valid & PNG_INFO_pHYs) != 0)
@@ -205,6 +222,9 @@ png_fixed_point PNGAPI
 png_get_pixel_aspect_ratio_fixed(png_const_structrp png_ptr,
     png_const_inforp info_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(185);
+#endif
 #ifdef PNG_READ_pHYs_SUPPORTED
    if (png_ptr != NULL && info_ptr != NULL &&
        (info_ptr->valid & PNG_INFO_pHYs) != 0 &&
@@ -235,6 +255,9 @@ png_get_pixel_aspect_ratio_fixed(png_const_structrp png_ptr,
 png_int_32 PNGAPI
 png_get_x_offset_microns(png_const_structrp png_ptr, png_const_inforp info_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(186);
+#endif
 #ifdef PNG_oFFs_SUPPORTED
    if (png_ptr != NULL && info_ptr != NULL &&
        (info_ptr->valid & PNG_INFO_oFFs) != 0)
@@ -255,6 +278,9 @@ png_get_x_offset_microns(png_const_structrp png_ptr, png_const_inforp info_ptr)
 png_int_32 PNGAPI
 png_get_y_offset_microns(png_const_structrp png_ptr, png_const_inforp info_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(187);
+#endif
 #ifdef PNG_oFFs_SUPPORTED
    if (png_ptr != NULL && info_ptr != NULL &&
        (info_ptr->valid & PNG_INFO_oFFs) != 0)
@@ -275,6 +301,9 @@ png_get_y_offset_microns(png_const_structrp png_ptr, png_const_inforp info_ptr)
 png_int_32 PNGAPI
 png_get_x_offset_pixels(png_const_structrp png_ptr, png_const_inforp info_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(188);
+#endif
 #ifdef PNG_oFFs_SUPPORTED
    if (png_ptr != NULL && info_ptr != NULL &&
        (info_ptr->valid & PNG_INFO_oFFs) != 0)
@@ -295,6 +324,9 @@ png_get_x_offset_pixels(png_const_structrp png_ptr, png_const_inforp info_ptr)
 png_int_32 PNGAPI
 png_get_y_offset_pixels(png_const_structrp png_ptr, png_const_inforp info_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(189);
+#endif
 #ifdef PNG_oFFs_SUPPORTED
    if (png_ptr != NULL && info_ptr != NULL &&
        (info_ptr->valid & PNG_INFO_oFFs) != 0)
@@ -316,6 +348,9 @@ png_get_y_offset_pixels(png_const_structrp png_ptr, png_const_inforp info_ptr)
 static png_uint_32
 ppi_from_ppm(png_uint_32 ppm)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(190);
+#endif
 #if 0
    /* The conversion is *(2.54/100), in binary (32 digits):
     * .00000110100000001001110101001001
@@ -421,6 +456,9 @@ png_uint_32 PNGAPI
 png_get_pHYs_dpi(png_const_structrp png_ptr, png_const_inforp info_ptr,
     png_uint_32 *res_x, png_uint_32 *res_y, int *unit_type)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(191);
+#endif
    png_uint_32 retval = 0;
 
    if (png_ptr != NULL && info_ptr != NULL &&
@@ -488,6 +526,9 @@ png_uint_32 PNGAPI
 png_get_bKGD(png_const_structrp png_ptr, png_inforp info_ptr,
     png_color_16p *background)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(192);
+#endif
    if (png_ptr != NULL && info_ptr != NULL &&
        (info_ptr->valid & PNG_INFO_bKGD) != 0 &&
        background != NULL)
@@ -513,6 +554,9 @@ png_get_cHRM(png_const_structrp png_ptr, png_const_inforp info_ptr,
     double *white_x, double *white_y, double *red_x, double *red_y,
     double *green_x, double *green_y, double *blue_x, double *blue_y)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(193);
+#endif
    /* Quiet API change: this code used to only return the end points if a cHRM
     * chunk was present, but the end points can also come from iCCP or sRGB
     * chunks, so in 1.6.0 the png_get_ APIs return the end points regardless and
@@ -560,6 +604,9 @@ png_get_cHRM_XYZ(png_const_structrp png_ptr, png_const_inforp info_ptr,
     double *green_Y, double *green_Z, double *blue_X, double *blue_Y,
     double *blue_Z)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(194);
+#endif
    if (png_ptr != NULL && info_ptr != NULL &&
        (info_ptr->colorspace.flags & PNG_COLORSPACE_HAVE_ENDPOINTS) != 0)
    {
@@ -608,6 +655,9 @@ png_get_cHRM_XYZ_fixed(png_const_structrp png_ptr, png_const_inforp info_ptr,
     png_fixed_point *int_blue_X, png_fixed_point *int_blue_Y,
     png_fixed_point *int_blue_Z)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(195);
+#endif
    if (png_ptr != NULL && info_ptr != NULL &&
       (info_ptr->colorspace.flags & PNG_COLORSPACE_HAVE_ENDPOINTS) != 0)
    {
@@ -643,6 +693,9 @@ png_get_cHRM_fixed(png_const_structrp png_ptr, png_const_inforp info_ptr,
     png_fixed_point *red_y, png_fixed_point *green_x, png_fixed_point *green_y,
     png_fixed_point *blue_x, png_fixed_point *blue_y)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(196);
+#endif
    png_debug1(1, "in %s retrieval function", "cHRM");
 
    if (png_ptr != NULL && info_ptr != NULL &&
@@ -678,6 +731,9 @@ png_uint_32 PNGAPI
 png_get_gAMA_fixed(png_const_structrp png_ptr, png_const_inforp info_ptr,
     png_fixed_point *file_gamma)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(197);
+#endif
    png_debug1(1, "in %s retrieval function", "gAMA");
 
    if (png_ptr != NULL && info_ptr != NULL &&
@@ -697,6 +753,9 @@ png_uint_32 PNGAPI
 png_get_gAMA(png_const_structrp png_ptr, png_const_inforp info_ptr,
     double *file_gamma)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(198);
+#endif
    png_debug1(1, "in %s retrieval function", "gAMA(float)");
 
    if (png_ptr != NULL && info_ptr != NULL &&
@@ -718,6 +777,9 @@ png_uint_32 PNGAPI
 png_get_sRGB(png_const_structrp png_ptr, png_const_inforp info_ptr,
     int *file_srgb_intent)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(199);
+#endif
    png_debug1(1, "in %s retrieval function", "sRGB");
 
    if (png_ptr != NULL && info_ptr != NULL &&
@@ -737,6 +799,9 @@ png_get_iCCP(png_const_structrp png_ptr, png_inforp info_ptr,
     png_charpp name, int *compression_type,
     png_bytepp profile, png_uint_32 *proflen)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(200);
+#endif
    png_debug1(1, "in %s retrieval function", "iCCP");
 
    if (png_ptr != NULL && info_ptr != NULL &&
@@ -764,6 +829,9 @@ int PNGAPI
 png_get_sPLT(png_const_structrp png_ptr, png_inforp info_ptr,
     png_sPLT_tpp spalettes)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(201);
+#endif
    if (png_ptr != NULL && info_ptr != NULL && spalettes != NULL)
    {
       *spalettes = info_ptr->splt_palettes;
@@ -789,6 +857,9 @@ png_uint_32 PNGAPI
 png_get_eXIf_1(png_const_structrp png_ptr, png_const_inforp info_ptr,
     png_uint_32 *num_exif, png_bytep *exif)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(202);
+#endif
    png_debug1(1, "in %s retrieval function", "eXIf");
 
    if (png_ptr != NULL && info_ptr != NULL &&
@@ -808,6 +879,9 @@ png_uint_32 PNGAPI
 png_get_hIST(png_const_structrp png_ptr, png_inforp info_ptr,
     png_uint_16p *hist)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(203);
+#endif
    png_debug1(1, "in %s retrieval function", "hIST");
 
    if (png_ptr != NULL && info_ptr != NULL &&
@@ -827,6 +901,9 @@ png_get_IHDR(png_const_structrp png_ptr, png_const_inforp info_ptr,
     int *color_type, int *interlace_type, int *compression_type,
     int *filter_type)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(204);
+#endif
    png_debug1(1, "in %s retrieval function", "IHDR");
 
    if (png_ptr == NULL || info_ptr == NULL)
@@ -870,6 +947,9 @@ png_uint_32 PNGAPI
 png_get_oFFs(png_const_structrp png_ptr, png_const_inforp info_ptr,
     png_int_32 *offset_x, png_int_32 *offset_y, int *unit_type)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(205);
+#endif
    png_debug1(1, "in %s retrieval function", "oFFs");
 
    if (png_ptr != NULL && info_ptr != NULL &&
@@ -892,6 +972,9 @@ png_get_pCAL(png_const_structrp png_ptr, png_inforp info_ptr,
     png_charp *purpose, png_int_32 *X0, png_int_32 *X1, int *type, int *nparams,
     png_charp *units, png_charpp *params)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(206);
+#endif
    png_debug1(1, "in %s retrieval function", "pCAL");
 
    if (png_ptr != NULL && info_ptr != NULL &&
@@ -921,6 +1004,9 @@ png_uint_32 PNGAPI
 png_get_sCAL_fixed(png_const_structrp png_ptr, png_const_inforp info_ptr,
     int *unit, png_fixed_point *width, png_fixed_point *height)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(207);
+#endif
    if (png_ptr != NULL && info_ptr != NULL &&
        (info_ptr->valid & PNG_INFO_sCAL) != 0)
    {
@@ -944,6 +1030,9 @@ png_uint_32 PNGAPI
 png_get_sCAL(png_const_structrp png_ptr, png_const_inforp info_ptr,
     int *unit, double *width, double *height)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(208);
+#endif
    if (png_ptr != NULL && info_ptr != NULL &&
        (info_ptr->valid & PNG_INFO_sCAL) != 0)
    {
@@ -960,6 +1049,9 @@ png_uint_32 PNGAPI
 png_get_sCAL_s(png_const_structrp png_ptr, png_const_inforp info_ptr,
     int *unit, png_charpp width, png_charpp height)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(209);
+#endif
    if (png_ptr != NULL && info_ptr != NULL &&
        (info_ptr->valid & PNG_INFO_sCAL) != 0)
    {
@@ -978,6 +1070,9 @@ png_uint_32 PNGAPI
 png_get_pHYs(png_const_structrp png_ptr, png_const_inforp info_ptr,
     png_uint_32 *res_x, png_uint_32 *res_y, int *unit_type)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(210);
+#endif
    png_uint_32 retval = 0;
 
    png_debug1(1, "in %s retrieval function", "pHYs");
@@ -1012,6 +1107,9 @@ png_uint_32 PNGAPI
 png_get_PLTE(png_const_structrp png_ptr, png_inforp info_ptr,
     png_colorp *palette, int *num_palette)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(211);
+#endif
    png_debug1(1, "in %s retrieval function", "PLTE");
 
    if (png_ptr != NULL && info_ptr != NULL &&
@@ -1031,6 +1129,9 @@ png_uint_32 PNGAPI
 png_get_sBIT(png_const_structrp png_ptr, png_inforp info_ptr,
     png_color_8p *sig_bit)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(212);
+#endif
    png_debug1(1, "in %s retrieval function", "sBIT");
 
    if (png_ptr != NULL && info_ptr != NULL &&
@@ -1049,6 +1150,9 @@ int PNGAPI
 png_get_text(png_const_structrp png_ptr, png_inforp info_ptr,
     png_textp *text_ptr, int *num_text)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(213);
+#endif
    if (png_ptr != NULL && info_ptr != NULL && info_ptr->num_text > 0)
    {
       png_debug1(1, "in 0x%lx retrieval function",
@@ -1075,6 +1179,9 @@ png_uint_32 PNGAPI
 png_get_tIME(png_const_structrp png_ptr, png_inforp info_ptr,
     png_timep *mod_time)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(214);
+#endif
    png_debug1(1, "in %s retrieval function", "tIME");
 
    if (png_ptr != NULL && info_ptr != NULL &&
@@ -1093,6 +1200,9 @@ png_uint_32 PNGAPI
 png_get_tRNS(png_const_structrp png_ptr, png_inforp info_ptr,
     png_bytep *trans_alpha, int *num_trans, png_color_16p *trans_color)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(215);
+#endif
    png_uint_32 retval = 0;
    if (png_ptr != NULL && info_ptr != NULL &&
        (info_ptr->valid & PNG_INFO_tRNS) != 0)
@@ -1139,6 +1249,9 @@ int PNGAPI
 png_get_unknown_chunks(png_const_structrp png_ptr, png_inforp info_ptr,
     png_unknown_chunkpp unknowns)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(216);
+#endif
    if (png_ptr != NULL && info_ptr != NULL && unknowns != NULL)
    {
       *unknowns = info_ptr->unknown_chunks;
@@ -1168,6 +1281,9 @@ png_get_user_chunk_ptr(png_const_structrp png_ptr)
 size_t PNGAPI
 png_get_compression_buffer_size(png_const_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(217);
+#endif
    if (png_ptr == NULL)
       return 0;
 

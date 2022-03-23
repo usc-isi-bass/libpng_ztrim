@@ -1,3 +1,8 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 
 /* filter_sse2_intrinsics.c - SSE2 optimized filter functions
  *
@@ -52,6 +57,9 @@ static void store3(void* p, __m128i v) {
 void png_read_filter_row_sub3_sse2(png_row_infop row_info, png_bytep row,
    png_const_bytep prev)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(334);
+#endif
    /* The Sub filter predicts each pixel as the previous pixel, a.
     * There is no pixel to the left of the first pixel.  It's encoded directly.
     * That works with our main loop if we just say that left pixel was zero.
@@ -85,6 +93,9 @@ void png_read_filter_row_sub3_sse2(png_row_infop row_info, png_bytep row,
 void png_read_filter_row_sub4_sse2(png_row_infop row_info, png_bytep row,
    png_const_bytep prev)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(335);
+#endif
    /* The Sub filter predicts each pixel as the previous pixel, a.
     * There is no pixel to the left of the first pixel.  It's encoded directly.
     * That works with our main loop if we just say that left pixel was zero.
@@ -110,6 +121,9 @@ void png_read_filter_row_sub4_sse2(png_row_infop row_info, png_bytep row,
 void png_read_filter_row_avg3_sse2(png_row_infop row_info, png_bytep row,
    png_const_bytep prev)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(336);
+#endif
    /* The Avg filter predicts each pixel as the (truncated) average of a and b.
     * There's no pixel to the left of the first pixel.  Luckily, it's
     * predicted to be half of the pixel above it.  So again, this works
@@ -165,6 +179,9 @@ void png_read_filter_row_avg3_sse2(png_row_infop row_info, png_bytep row,
 void png_read_filter_row_avg4_sse2(png_row_infop row_info, png_bytep row,
    png_const_bytep prev)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(337);
+#endif
    /* The Avg filter predicts each pixel as the (truncated) average of a and b.
     * There's no pixel to the left of the first pixel.  Luckily, it's
     * predicted to be half of the pixel above it.  So again, this works
@@ -200,6 +217,9 @@ void png_read_filter_row_avg4_sse2(png_row_infop row_info, png_bytep row,
 
 /* Returns |x| for 16-bit lanes. */
 static __m128i abs_i16(__m128i x) {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(338);
+#endif
 #if PNG_INTEL_SSE_IMPLEMENTATION >= 2
    return _mm_abs_epi16(x);
 #else
@@ -229,6 +249,9 @@ static __m128i if_then_else(__m128i c, __m128i t, __m128i e) {
 void png_read_filter_row_paeth3_sse2(png_row_infop row_info, png_bytep row,
    png_const_bytep prev)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(339);
+#endif
    /* Paeth tries to predict pixel d using the pixel to the left of it, a,
     * and two pixels from the previous row, b and c:
     *   prev: c b
@@ -328,6 +351,9 @@ void png_read_filter_row_paeth3_sse2(png_row_infop row_info, png_bytep row,
 void png_read_filter_row_paeth4_sse2(png_row_infop row_info, png_bytep row,
    png_const_bytep prev)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(340);
+#endif
    /* Paeth tries to predict pixel d using the pixel to the left of it, a,
     * and two pixels from the previous row, b and c:
     *   prev: c b

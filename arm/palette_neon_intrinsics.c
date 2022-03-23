@@ -1,3 +1,8 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 
 /* palette_neon_intrinsics.c - NEON optimised palette expansion functions
  *
@@ -24,6 +29,9 @@
 void
 png_riffle_palette_neon(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(351);
+#endif
    png_const_colorp palette = png_ptr->palette;
    png_bytep riffled_palette = png_ptr->riffled_palette;
    png_const_bytep trans_alpha = png_ptr->trans_alpha;
@@ -62,6 +70,9 @@ int
 png_do_expand_palette_rgba8_neon(png_structrp png_ptr, png_row_infop row_info,
     png_const_bytep row, png_bytepp ssp, png_bytepp ddp)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(352);
+#endif
    png_uint_32 row_width = row_info->width;
    const png_uint_32 *riffled_palette =
       (const png_uint_32 *)png_ptr->riffled_palette;
@@ -106,6 +117,9 @@ int
 png_do_expand_palette_rgb8_neon(png_structrp png_ptr, png_row_infop row_info,
     png_const_bytep row, png_bytepp ssp, png_bytepp ddp)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(353);
+#endif
    png_uint_32 row_width = row_info->width;
    png_const_bytep palette = (png_const_bytep)png_ptr->palette;
    const png_uint_32 pixels_per_chunk = 8;

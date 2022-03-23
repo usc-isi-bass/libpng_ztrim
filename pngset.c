@@ -1,3 +1,8 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 
 /* pngset.c - storage of image information into info struct
  *
@@ -25,6 +30,9 @@ void PNGAPI
 png_set_bKGD(png_const_structrp png_ptr, png_inforp info_ptr,
     png_const_color_16p background)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(134);
+#endif
    png_debug1(1, "in %s storage function", "bKGD");
 
    if (png_ptr == NULL || info_ptr == NULL || background == NULL)
@@ -42,6 +50,9 @@ png_set_cHRM_fixed(png_const_structrp png_ptr, png_inforp info_ptr,
     png_fixed_point red_y, png_fixed_point green_x, png_fixed_point green_y,
     png_fixed_point blue_x, png_fixed_point blue_y)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(135);
+#endif
    png_xy xy;
 
    png_debug1(1, "in %s storage function", "cHRM fixed");
@@ -73,6 +84,9 @@ png_set_cHRM_XYZ_fixed(png_const_structrp png_ptr, png_inforp info_ptr,
     png_fixed_point int_blue_X, png_fixed_point int_blue_Y,
     png_fixed_point int_blue_Z)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(136);
+#endif
    png_XYZ XYZ;
 
    png_debug1(1, "in %s storage function", "cHRM XYZ fixed");
@@ -103,6 +117,9 @@ png_set_cHRM(png_const_structrp png_ptr, png_inforp info_ptr,
     double white_x, double white_y, double red_x, double red_y,
     double green_x, double green_y, double blue_x, double blue_y)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(137);
+#endif
    png_set_cHRM_fixed(png_ptr, info_ptr,
        png_fixed(png_ptr, white_x, "cHRM White X"),
        png_fixed(png_ptr, white_y, "cHRM White Y"),
@@ -119,6 +136,9 @@ png_set_cHRM_XYZ(png_const_structrp png_ptr, png_inforp info_ptr, double red_X,
     double red_Y, double red_Z, double green_X, double green_Y, double green_Z,
     double blue_X, double blue_Y, double blue_Z)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(138);
+#endif
    png_set_cHRM_XYZ_fixed(png_ptr, info_ptr,
        png_fixed(png_ptr, red_X, "cHRM Red X"),
        png_fixed(png_ptr, red_Y, "cHRM Red Y"),
@@ -148,6 +168,9 @@ void PNGAPI
 png_set_eXIf_1(png_const_structrp png_ptr, png_inforp info_ptr,
     png_uint_32 num_exif, png_bytep eXIf_buf)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(139);
+#endif
    int i;
 
    png_debug1(1, "in %s storage function", "eXIf");
@@ -186,6 +209,9 @@ void PNGFAPI
 png_set_gAMA_fixed(png_const_structrp png_ptr, png_inforp info_ptr,
     png_fixed_point file_gamma)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(140);
+#endif
    png_debug1(1, "in %s storage function", "gAMA");
 
    if (png_ptr == NULL || info_ptr == NULL)
@@ -210,6 +236,9 @@ void PNGAPI
 png_set_hIST(png_const_structrp png_ptr, png_inforp info_ptr,
     png_const_uint_16p hist)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(141);
+#endif
    int i;
 
    png_debug1(1, "in %s storage function", "hIST");
@@ -256,6 +285,9 @@ png_set_IHDR(png_const_structrp png_ptr, png_inforp info_ptr,
     int color_type, int interlace_type, int compression_type,
     int filter_type)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(142);
+#endif
    png_debug1(1, "in %s storage function", "IHDR");
 
    if (png_ptr == NULL || info_ptr == NULL)
@@ -295,6 +327,9 @@ void PNGAPI
 png_set_oFFs(png_const_structrp png_ptr, png_inforp info_ptr,
     png_int_32 offset_x, png_int_32 offset_y, int unit_type)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(143);
+#endif
    png_debug1(1, "in %s storage function", "oFFs");
 
    if (png_ptr == NULL || info_ptr == NULL)
@@ -313,6 +348,9 @@ png_set_pCAL(png_const_structrp png_ptr, png_inforp info_ptr,
     png_const_charp purpose, png_int_32 X0, png_int_32 X1, int type,
     int nparams, png_const_charp units, png_charpp params)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(144);
+#endif
    size_t length;
    int i;
 
@@ -430,6 +468,9 @@ void PNGAPI
 png_set_sCAL_s(png_const_structrp png_ptr, png_inforp info_ptr,
     int unit, png_const_charp swidth, png_const_charp sheight)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(145);
+#endif
    size_t lengthw = 0, lengthh = 0;
 
    png_debug1(1, "in %s storage function", "sCAL");
@@ -497,6 +538,9 @@ void PNGAPI
 png_set_sCAL(png_const_structrp png_ptr, png_inforp info_ptr, int unit,
     double width, double height)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(146);
+#endif
    png_debug1(1, "in %s storage function", "sCAL");
 
    /* Check the arguments. */
@@ -527,6 +571,9 @@ void PNGAPI
 png_set_sCAL_fixed(png_const_structrp png_ptr, png_inforp info_ptr, int unit,
     png_fixed_point width, png_fixed_point height)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(147);
+#endif
    png_debug1(1, "in %s storage function", "sCAL");
 
    /* Check the arguments. */
@@ -556,6 +603,9 @@ void PNGAPI
 png_set_pHYs(png_const_structrp png_ptr, png_inforp info_ptr,
     png_uint_32 res_x, png_uint_32 res_y, int unit_type)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(148);
+#endif
    png_debug1(1, "in %s storage function", "pHYs");
 
    if (png_ptr == NULL || info_ptr == NULL)
@@ -572,6 +622,9 @@ void PNGAPI
 png_set_PLTE(png_structrp png_ptr, png_inforp info_ptr,
     png_const_colorp palette, int num_palette)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(149);
+#endif
 
    png_uint_32 max_palette_length;
 
@@ -647,6 +700,9 @@ void PNGAPI
 png_set_sBIT(png_const_structrp png_ptr, png_inforp info_ptr,
     png_const_color_8p sig_bit)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(150);
+#endif
    png_debug1(1, "in %s storage function", "sBIT");
 
    if (png_ptr == NULL || info_ptr == NULL || sig_bit == NULL)
@@ -661,6 +717,9 @@ png_set_sBIT(png_const_structrp png_ptr, png_inforp info_ptr,
 void PNGAPI
 png_set_sRGB(png_const_structrp png_ptr, png_inforp info_ptr, int srgb_intent)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(151);
+#endif
    png_debug1(1, "in %s storage function", "sRGB");
 
    if (png_ptr == NULL || info_ptr == NULL)
@@ -674,6 +733,9 @@ void PNGAPI
 png_set_sRGB_gAMA_and_cHRM(png_const_structrp png_ptr, png_inforp info_ptr,
     int srgb_intent)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(152);
+#endif
    png_debug1(1, "in %s storage function", "sRGB_gAMA_and_cHRM");
 
    if (png_ptr == NULL || info_ptr == NULL)
@@ -698,6 +760,9 @@ png_set_iCCP(png_const_structrp png_ptr, png_inforp info_ptr,
     png_const_charp name, int compression_type,
     png_const_bytep profile, png_uint_32 proflen)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(153);
+#endif
    png_charp new_iccp_name;
    png_bytep new_iccp_profile;
    size_t length;
@@ -782,6 +847,9 @@ int /* PRIVATE */
 png_set_text_2(png_const_structrp png_ptr, png_inforp info_ptr,
     png_const_textp text_ptr, int num_text)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(154);
+#endif
    int i;
 
    png_debug1(1, "in %lx storage function", png_ptr == NULL ? 0xabadca11U :
@@ -977,6 +1045,9 @@ void PNGAPI
 png_set_tIME(png_const_structrp png_ptr, png_inforp info_ptr,
     png_const_timep mod_time)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(155);
+#endif
    png_debug1(1, "in %s storage function", "tIME");
 
    if (png_ptr == NULL || info_ptr == NULL || mod_time == NULL ||
@@ -1003,6 +1074,9 @@ void PNGAPI
 png_set_tRNS(png_structrp png_ptr, png_inforp info_ptr,
     png_const_bytep trans_alpha, int num_trans, png_const_color_16p trans_color)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(156);
+#endif
    png_debug1(1, "in %s storage function", "tRNS");
 
    if (png_ptr == NULL || info_ptr == NULL)
@@ -1079,6 +1153,9 @@ png_set_sPLT(png_const_structrp png_ptr,
  *                   added.
  */
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(157);
+#endif
    png_sPLT_tp np;
 
    if (png_ptr == NULL || info_ptr == NULL || nentries <= 0 || entries == NULL)
@@ -1171,6 +1248,9 @@ png_set_sPLT(png_const_structrp png_ptr,
 static png_byte
 check_location(png_const_structrp png_ptr, int location)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(158);
+#endif
    location &= (PNG_HAVE_IHDR|PNG_HAVE_PLTE|PNG_AFTER_IDAT);
 
    /* New in 1.6.0; copy the location and check it.  This is an API
@@ -1209,6 +1289,9 @@ void PNGAPI
 png_set_unknown_chunks(png_const_structrp png_ptr,
     png_inforp info_ptr, png_const_unknown_chunkp unknowns, int num_unknowns)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(159);
+#endif
    png_unknown_chunkp np;
 
    if (png_ptr == NULL || info_ptr == NULL || num_unknowns <= 0 ||
@@ -1308,6 +1391,9 @@ void PNGAPI
 png_set_unknown_chunk_location(png_const_structrp png_ptr, png_inforp info_ptr,
     int chunk, int location)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(160);
+#endif
    /* This API is pretty pointless in 1.6.0 because the location can be set
     * before the call to png_set_unknown_chunks.
     *
@@ -1337,6 +1423,9 @@ png_set_unknown_chunk_location(png_const_structrp png_ptr, png_inforp info_ptr,
 png_uint_32 PNGAPI
 png_permit_mng_features(png_structrp png_ptr, png_uint_32 mng_features)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(161);
+#endif
    png_debug(1, "in png_permit_mng_features");
 
    if (png_ptr == NULL)
@@ -1352,6 +1441,9 @@ png_permit_mng_features(png_structrp png_ptr, png_uint_32 mng_features)
 static unsigned int
 add_one_chunk(png_bytep list, unsigned int count, png_const_bytep add, int keep)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(162);
+#endif
    unsigned int i;
 
    /* Utility function: update the 'keep' state of a chunk if it is already in
@@ -1381,6 +1473,9 @@ void PNGAPI
 png_set_keep_unknown_chunks(png_structrp png_ptr, int keep,
     png_const_bytep chunk_list, int num_chunks_in)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(163);
+#endif
    png_bytep new_list;
    unsigned int num_chunks, old_num_chunks;
 
@@ -1540,6 +1635,9 @@ void PNGAPI
 png_set_read_user_chunk_fn(png_structrp png_ptr, png_voidp user_chunk_ptr,
     png_user_chunk_ptr read_user_chunk_fn)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(164);
+#endif
    png_debug(1, "in png_set_read_user_chunk_fn");
 
    if (png_ptr == NULL)
@@ -1555,6 +1653,9 @@ void PNGAPI
 png_set_rows(png_const_structrp png_ptr, png_inforp info_ptr,
     png_bytepp row_pointers)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(165);
+#endif
    png_debug1(1, "in %s storage function", "rows");
 
    if (png_ptr == NULL || info_ptr == NULL)
@@ -1574,6 +1675,9 @@ png_set_rows(png_const_structrp png_ptr, png_inforp info_ptr,
 void PNGAPI
 png_set_compression_buffer_size(png_structrp png_ptr, size_t size)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(166);
+#endif
    if (png_ptr == NULL)
       return;
 
@@ -1645,6 +1749,9 @@ void PNGAPI
 png_set_user_limits(png_structrp png_ptr, png_uint_32 user_width_max,
     png_uint_32 user_height_max)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(167);
+#endif
    /* Images with dimensions larger than these limits will be
     * rejected by png_set_IHDR().  To accept any PNG datastream
     * regardless of dimensions, set both limits to 0x7fffffff.
@@ -1679,6 +1786,9 @@ png_set_chunk_malloc_max(png_structrp png_ptr,
 void PNGAPI
 png_set_benign_errors(png_structrp png_ptr, int allowed)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(168);
+#endif
    png_debug(1, "in png_set_benign_errors");
 
    /* If allowed is 1, png_benign_error() is treated as a warning.
@@ -1709,6 +1819,9 @@ png_set_benign_errors(png_structrp png_ptr, int allowed)
 void PNGAPI
 png_set_check_for_invalid_index(png_structrp png_ptr, int allowed)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(169);
+#endif
    png_debug(1, "in png_set_check_for_invalid_index");
 
    if (allowed > 0)
@@ -1734,6 +1847,9 @@ png_set_check_for_invalid_index(png_structrp png_ptr, int allowed)
 png_uint_32 /* PRIVATE */
 png_check_keyword(png_structrp png_ptr, png_const_charp key, png_bytep new_key)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(170);
+#endif
 #ifdef PNG_WARNINGS_SUPPORTED
    png_const_charp orig_key = key;
 #endif

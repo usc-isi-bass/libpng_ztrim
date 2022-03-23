@@ -1,3 +1,8 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 
 /* pngmem.c - stub functions for memory allocation
  *
@@ -24,6 +29,9 @@
 void /* PRIVATE */
 png_destroy_png_struct(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(171);
+#endif
    if (png_ptr != NULL)
    {
       /* png_free might call png_error and may certainly call
@@ -49,6 +57,9 @@ png_destroy_png_struct(png_structrp png_ptr)
 PNG_FUNCTION(png_voidp,PNGAPI
 png_calloc,(png_const_structrp png_ptr, png_alloc_size_t size),PNG_ALLOCATED)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(172);
+#endif
    png_voidp ret;
 
    ret = png_malloc(png_ptr, size);
@@ -68,6 +79,9 @@ PNG_FUNCTION(png_voidp /* PRIVATE */,
 png_malloc_base,(png_const_structrp png_ptr, png_alloc_size_t size),
     PNG_ALLOCATED)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(173);
+#endif
    /* Moved to png_malloc_base from png_malloc_default in 1.6.0; the DOS
     * allocators have also been removed in 1.6.0, so any 16-bit system now has
     * to implement a user memory handler.  This checks to be sure it isn't
@@ -109,6 +123,9 @@ static png_voidp
 png_malloc_array_checked(png_const_structrp png_ptr, int nelements,
     size_t element_size)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(174);
+#endif
    png_alloc_size_t req = (png_alloc_size_t)nelements; /* known to be > 0 */
 
    if (req <= PNG_SIZE_MAX/element_size)
@@ -132,6 +149,9 @@ PNG_FUNCTION(png_voidp /* PRIVATE */,
 png_realloc_array,(png_const_structrp png_ptr, png_const_voidp old_array,
     int old_elements, int add_elements, size_t element_size),PNG_ALLOCATED)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(175);
+#endif
    /* These are internal errors: */
    if (add_elements <= 0 || element_size == 0 || old_elements < 0 ||
       (old_array == NULL && old_elements > 0))
@@ -171,6 +191,9 @@ png_realloc_array,(png_const_structrp png_ptr, png_const_voidp old_array,
 PNG_FUNCTION(png_voidp,PNGAPI
 png_malloc,(png_const_structrp png_ptr, png_alloc_size_t size),PNG_ALLOCATED)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(176);
+#endif
    png_voidp ret;
 
    if (png_ptr == NULL)
@@ -189,6 +212,9 @@ PNG_FUNCTION(png_voidp,PNGAPI
 png_malloc_default,(png_const_structrp png_ptr, png_alloc_size_t size),
     PNG_ALLOCATED PNG_DEPRECATED)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(177);
+#endif
    png_voidp ret;
 
    if (png_ptr == NULL)
@@ -212,6 +238,9 @@ PNG_FUNCTION(png_voidp,PNGAPI
 png_malloc_warn,(png_const_structrp png_ptr, png_alloc_size_t size),
     PNG_ALLOCATED)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(178);
+#endif
    if (png_ptr != NULL)
    {
       png_voidp ret = png_malloc_base(png_ptr, size);
@@ -231,6 +260,9 @@ png_malloc_warn,(png_const_structrp png_ptr, png_alloc_size_t size),
 void PNGAPI
 png_free(png_const_structrp png_ptr, png_voidp ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(179);
+#endif
    if (png_ptr == NULL || ptr == NULL)
       return;
 
@@ -260,6 +292,9 @@ void PNGAPI
 png_set_mem_fn(png_structrp png_ptr, png_voidp mem_ptr, png_malloc_ptr
   malloc_fn, png_free_ptr free_fn)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(180);
+#endif
    if (png_ptr != NULL)
    {
       png_ptr->mem_ptr = mem_ptr;

@@ -1,3 +1,8 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 
 /* pngread.c - read a PNG file
  *
@@ -26,6 +31,9 @@ PNG_FUNCTION(png_structp,PNGAPI
 png_create_read_struct,(png_const_charp user_png_ver, png_voidp error_ptr,
     png_error_ptr error_fn, png_error_ptr warn_fn),PNG_ALLOCATED)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(296);
+#endif
 #ifndef PNG_USER_MEM_SUPPORTED
    png_structp png_ptr = png_create_png_struct(user_png_ver, error_ptr,
         error_fn, warn_fn, NULL, NULL, NULL);
@@ -42,6 +50,9 @@ png_create_read_struct_2,(png_const_charp user_png_ver, png_voidp error_ptr,
     png_error_ptr error_fn, png_error_ptr warn_fn, png_voidp mem_ptr,
     png_malloc_ptr malloc_fn, png_free_ptr free_fn),PNG_ALLOCATED)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(297);
+#endif
    png_structp png_ptr = png_create_png_struct(user_png_ver, error_ptr,
        error_fn, warn_fn, mem_ptr, malloc_fn, free_fn);
 #endif /* USER_MEM */
@@ -91,6 +102,9 @@ png_create_read_struct_2,(png_const_charp user_png_ver, png_voidp error_ptr,
 void PNGAPI
 png_read_info(png_structrp png_ptr, png_inforp info_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(298);
+#endif
 #ifdef PNG_HANDLE_AS_UNKNOWN_SUPPORTED
    int keep;
 #endif
@@ -266,6 +280,9 @@ png_read_info(png_structrp png_ptr, png_inforp info_ptr)
 void PNGAPI
 png_read_update_info(png_structrp png_ptr, png_inforp info_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(299);
+#endif
    png_debug(1, "in png_read_update_info");
 
    if (png_ptr != NULL)
@@ -297,6 +314,9 @@ png_read_update_info(png_structrp png_ptr, png_inforp info_ptr)
 void PNGAPI
 png_start_read_image(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(300);
+#endif
    png_debug(1, "in png_start_read_image");
 
    if (png_ptr != NULL)
@@ -320,6 +340,9 @@ png_start_read_image(png_structrp png_ptr)
 static void
 png_do_read_intrapixel(png_row_infop row_info, png_bytep row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(301);
+#endif
    png_debug(1, "in png_do_read_intrapixel");
 
    if (
@@ -382,6 +405,9 @@ png_do_read_intrapixel(png_row_infop row_info, png_bytep row)
 void PNGAPI
 png_read_row(png_structrp png_ptr, png_bytep row, png_bytep dsp_row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(302);
+#endif
    png_row_info row_info;
 
    if (png_ptr == NULL)
@@ -645,6 +671,9 @@ void PNGAPI
 png_read_rows(png_structrp png_ptr, png_bytepp row,
     png_bytepp display_row, png_uint_32 num_rows)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(303);
+#endif
    png_uint_32 i;
    png_bytepp rp;
    png_bytepp dp;
@@ -699,6 +728,9 @@ png_read_rows(png_structrp png_ptr, png_bytepp row,
 void PNGAPI
 png_read_image(png_structrp png_ptr, png_bytepp image)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(304);
+#endif
    png_uint_32 i, image_height;
    int pass, j;
    png_bytepp rp;
@@ -765,6 +797,9 @@ png_read_image(png_structrp png_ptr, png_bytepp image)
 void PNGAPI
 png_read_end(png_structrp png_ptr, png_inforp info_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(305);
+#endif
 #ifdef PNG_HANDLE_AS_UNKNOWN_SUPPORTED
    int keep;
 #endif
@@ -939,6 +974,9 @@ png_read_end(png_structrp png_ptr, png_inforp info_ptr)
 static void
 png_read_destroy(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(306);
+#endif
    png_debug(1, "in png_read_destroy");
 
 #ifdef PNG_READ_GAMMA_SUPPORTED
@@ -1011,6 +1049,9 @@ void PNGAPI
 png_destroy_read_struct(png_structpp png_ptr_ptr, png_infopp info_ptr_ptr,
     png_infopp end_info_ptr_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(307);
+#endif
    png_structrp png_ptr = NULL;
 
    png_debug(1, "in png_destroy_read_struct");
@@ -1049,6 +1090,9 @@ void PNGAPI
 png_read_png(png_structrp png_ptr, png_inforp info_ptr,
     int transforms, voidp params)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(308);
+#endif
    if (png_ptr == NULL || info_ptr == NULL)
       return;
 
@@ -1305,6 +1349,9 @@ typedef struct
 static int
 png_image_read_init(png_imagep image)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(309);
+#endif
    if (image->opaque == NULL)
    {
       png_structp png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, image,
@@ -1354,6 +1401,9 @@ png_image_read_init(png_imagep image)
 static png_uint_32
 png_image_format(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(310);
+#endif
    png_uint_32 format = 0;
 
    if ((png_ptr->color_type & PNG_COLOR_MASK_COLOR) != 0)
@@ -1387,6 +1437,9 @@ png_image_format(png_structrp png_ptr)
 static int
 png_gamma_not_sRGB(png_fixed_point g)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(311);
+#endif
    if (g < PNG_FP_1)
    {
       /* An uninitialized gamma is assumed to be sRGB for the simplified API. */
@@ -1406,6 +1459,9 @@ png_gamma_not_sRGB(png_fixed_point g)
 static int
 png_image_read_header(png_voidp argument)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(312);
+#endif
    png_imagep image = png_voidcast(png_imagep, argument);
    png_structrp png_ptr = image->opaque->png_ptr;
    png_inforp info_ptr = image->opaque->info_ptr;
@@ -1471,6 +1527,9 @@ png_image_read_header(png_voidp argument)
 int PNGAPI
 png_image_begin_read_from_stdio(png_imagep image, FILE* file)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(313);
+#endif
    if (image != NULL && image->version == PNG_IMAGE_VERSION)
    {
       if (file != NULL)
@@ -1501,6 +1560,9 @@ png_image_begin_read_from_stdio(png_imagep image, FILE* file)
 int PNGAPI
 png_image_begin_read_from_file(png_imagep image, const char *file_name)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(314);
+#endif
    if (image != NULL && image->version == PNG_IMAGE_VERSION)
    {
       if (file_name != NULL)
@@ -1540,6 +1602,9 @@ png_image_begin_read_from_file(png_imagep image, const char *file_name)
 static void PNGCBAPI
 png_image_memory_read(png_structp png_ptr, png_bytep out, size_t need)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(315);
+#endif
    if (png_ptr != NULL)
    {
       png_imagep image = png_voidcast(png_imagep, png_ptr->io_ptr);
@@ -1570,6 +1635,9 @@ png_image_memory_read(png_structp png_ptr, png_bytep out, size_t need)
 int PNGAPI png_image_begin_read_from_memory(png_imagep image,
     png_const_voidp memory, size_t size)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(316);
+#endif
    if (image != NULL && image->version == PNG_IMAGE_VERSION)
    {
       if (memory != NULL && size > 0)
@@ -1608,6 +1676,9 @@ int PNGAPI png_image_begin_read_from_memory(png_imagep image,
 static void
 png_image_skip_unused_chunks(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(317);
+#endif
    /* Prepare the reader to ignore all recognized chunks whose data will not
     * be used, i.e., all chunks recognized by libpng except for those
     * involved in basic image reading:
@@ -1665,6 +1736,9 @@ png_image_skip_unused_chunks(png_structrp png_ptr)
 static void
 set_file_encoding(png_image_read_control *display)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(318);
+#endif
    png_fixed_point g = display->image->opaque->png_ptr->colorspace.gamma;
    if (png_gamma_significant(g) != 0)
    {
@@ -1685,6 +1759,9 @@ set_file_encoding(png_image_read_control *display)
 static unsigned int
 decode_gamma(png_image_read_control *display, png_uint_32 value, int encoding)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(319);
+#endif
    if (encoding == P_FILE) /* double check */
       encoding = display->file_encoding;
 
@@ -1726,6 +1803,9 @@ png_colormap_compose(png_image_read_control *display,
     png_uint_32 foreground, int foreground_encoding, png_uint_32 alpha,
     png_uint_32 background, int encoding)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(320);
+#endif
    /* The file value is composed on the background, the background has the given
     * encoding and so does the result, the file is encoded with P_FILE and the
     * file and alpha are 8-bit values.  The (output) encoding will always be
@@ -1763,6 +1843,9 @@ png_create_colormap_entry(png_image_read_control *display,
     png_uint_32 ip, png_uint_32 red, png_uint_32 green, png_uint_32 blue,
     png_uint_32 alpha, int encoding)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(321);
+#endif
    png_imagep image = display->image;
    int output_encoding = (image->format & PNG_FORMAT_FLAG_LINEAR) != 0 ?
        P_LINEAR : P_sRGB;
@@ -2005,6 +2088,9 @@ make_gray_colormap(png_image_read_control *display)
 static int
 make_ga_colormap(png_image_read_control *display)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(322);
+#endif
    unsigned int i, a;
 
    /* Alpha is retained, the output will be a color-map with entries
@@ -2060,6 +2146,9 @@ make_ga_colormap(png_image_read_control *display)
 static int
 make_rgb_colormap(png_image_read_control *display)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(323);
+#endif
    unsigned int i, r;
 
    /* Build a 6x6x6 opaque RGB cube */
@@ -2089,6 +2178,9 @@ make_rgb_colormap(png_image_read_control *display)
 static int
 png_image_read_colormap(png_voidp argument)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(324);
+#endif
    png_image_read_control *display =
       png_voidcast(png_image_read_control*, argument);
    png_imagep image = display->image;
@@ -2943,6 +3035,9 @@ png_image_read_colormap(png_voidp argument)
 static int
 png_image_read_and_map(png_voidp argument)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(325);
+#endif
    png_image_read_control *display = png_voidcast(png_image_read_control*,
        argument);
    png_imagep image = display->image;
@@ -3132,6 +3227,9 @@ png_image_read_and_map(png_voidp argument)
 static int
 png_image_read_colormapped(png_voidp argument)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(326);
+#endif
    png_image_read_control *display = png_voidcast(png_image_read_control*,
        argument);
    png_imagep image = display->image;
@@ -3264,6 +3362,9 @@ png_image_read_colormapped(png_voidp argument)
 static int
 png_image_read_composite(png_voidp argument)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(327);
+#endif
    png_image_read_control *display = png_voidcast(png_image_read_control*,
        argument);
    png_imagep image = display->image;
@@ -3391,6 +3492,9 @@ png_image_read_composite(png_voidp argument)
 static int
 png_image_read_background(png_voidp argument)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(328);
+#endif
    png_image_read_control *display = png_voidcast(png_image_read_control*,
        argument);
    png_imagep image = display->image;
@@ -3671,6 +3775,9 @@ png_image_read_background(png_voidp argument)
 static int
 png_image_read_direct(png_voidp argument)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(329);
+#endif
    png_image_read_control *display = png_voidcast(png_image_read_control*,
        argument);
    png_imagep image = display->image;
@@ -4108,6 +4215,9 @@ int PNGAPI
 png_image_finish_read(png_imagep image, png_const_colorp background,
     void *buffer, png_int_32 row_stride, void *colormap)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(330);
+#endif
    if (image != NULL && image->version == PNG_IMAGE_VERSION)
    {
       /* Check for row_stride overflow.  This check is not performed on the

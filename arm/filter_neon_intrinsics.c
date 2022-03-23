@@ -1,3 +1,8 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 
 /* filter_neon_intrinsics.c - NEON optimised filter functions
  *
@@ -51,6 +56,9 @@ void
 png_read_filter_row_up_neon(png_row_infop row_info, png_bytep row,
    png_const_bytep prev_row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(342);
+#endif
    png_bytep rp = row;
    png_bytep rp_stop = row + row_info->rowbytes;
    png_const_bytep pp = prev_row;
@@ -72,6 +80,9 @@ void
 png_read_filter_row_sub3_neon(png_row_infop row_info, png_bytep row,
    png_const_bytep prev_row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(343);
+#endif
    png_bytep rp = row;
    png_bytep rp_stop = row + row_info->rowbytes;
 
@@ -119,6 +130,9 @@ void
 png_read_filter_row_sub4_neon(png_row_infop row_info, png_bytep row,
    png_const_bytep prev_row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(344);
+#endif
    png_bytep rp = row;
    png_bytep rp_stop = row + row_info->rowbytes;
 
@@ -151,6 +165,9 @@ void
 png_read_filter_row_avg3_neon(png_row_infop row_info, png_bytep row,
    png_const_bytep prev_row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(345);
+#endif
    png_bytep rp = row;
    png_const_bytep pp = prev_row;
    png_bytep rp_stop = row + row_info->rowbytes;
@@ -219,6 +236,9 @@ void
 png_read_filter_row_avg4_neon(png_row_infop row_info, png_bytep row,
    png_const_bytep prev_row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(346);
+#endif
    png_bytep rp = row;
    png_bytep rp_stop = row + row_info->rowbytes;
    png_const_bytep pp = prev_row;
@@ -260,6 +280,9 @@ png_read_filter_row_avg4_neon(png_row_infop row_info, png_bytep row,
 static uint8x8_t
 paeth(uint8x8_t a, uint8x8_t b, uint8x8_t c)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(347);
+#endif
    uint8x8_t d, e;
    uint16x8_t p1, pa, pb, pc;
 
@@ -288,6 +311,9 @@ void
 png_read_filter_row_paeth3_neon(png_row_infop row_info, png_bytep row,
    png_const_bytep prev_row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(348);
+#endif
    png_bytep rp = row;
    png_const_bytep pp = prev_row;
    png_bytep rp_stop = row + row_info->rowbytes;
@@ -356,6 +382,9 @@ void
 png_read_filter_row_paeth4_neon(png_row_infop row_info, png_bytep row,
    png_const_bytep prev_row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(349);
+#endif
    png_bytep rp = row;
    png_bytep rp_stop = row + row_info->rowbytes;
    png_const_bytep pp = prev_row;

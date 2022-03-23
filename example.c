@@ -1,3 +1,8 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 
 #if 0 /* in case someone actually tries to compile this */
 
@@ -248,6 +253,9 @@ int main(int argc, const char **argv)
 #define PNG_BYTES_TO_CHECK 4
 int check_if_png(char *file_name, FILE **fp)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(69);
+#endif
    char buf[PNG_BYTES_TO_CHECK];
 
    /* Open the prospective PNG file. */
@@ -273,6 +281,9 @@ int check_if_png(char *file_name, FILE **fp)
 #ifdef open_file /* prototype 1 */
 void read_png(char *file_name) /* We need to open the file */
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(70);
+#endif
    png_structp png_ptr;
    png_infop info_ptr;
    int sig_read = 0;

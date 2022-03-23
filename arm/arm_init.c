@@ -1,3 +1,8 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 
 /* arm_init.c - NEON optimised filter functions
  *
@@ -57,6 +62,9 @@ static int png_have_neon(png_structp png_ptr);
 void
 png_init_filter_functions_neon(png_structp pp, unsigned int bpp)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(350);
+#endif
    /* The switch statement is compiled in for ARM_NEON_API, the call to
     * png_have_neon is compiled in for ARM_NEON_CHECK.  If both are defined
     * the check is only performed if the API has not set the NEON option on

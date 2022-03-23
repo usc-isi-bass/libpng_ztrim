@@ -1,3 +1,8 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 
 /* png.c - location for general purpose libpng functions
  *
@@ -46,6 +51,9 @@ typedef png_libpng_version_1_6_38_git Your_png_h_is_not_version_1_6_38_git;
 void PNGAPI
 png_set_sig_bytes(png_structrp png_ptr, int num_bytes)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(103);
+#endif
    unsigned int nb = (unsigned int)num_bytes;
 
    png_debug(1, "in png_set_sig_bytes");
@@ -73,6 +81,9 @@ png_set_sig_bytes(png_structrp png_ptr, int num_bytes)
 int PNGAPI
 png_sig_cmp(png_const_bytep sig, size_t start, size_t num_to_check)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(104);
+#endif
    png_byte png_signature[8] = {137, 80, 78, 71, 13, 10, 26, 10};
 
    if (num_to_check > 8)
@@ -97,6 +108,9 @@ png_sig_cmp(png_const_bytep sig, size_t start, size_t num_to_check)
 PNG_FUNCTION(voidpf /* PRIVATE */,
 png_zalloc,(voidpf png_ptr, uInt items, uInt size),PNG_ALLOCATED)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(105);
+#endif
    png_alloc_size_t num_bytes = size;
 
    if (png_ptr == NULL)
@@ -138,6 +152,9 @@ png_reset_crc(png_structrp png_ptr)
 void /* PRIVATE */
 png_calculate_crc(png_structrp png_ptr, png_const_bytep ptr, size_t length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(106);
+#endif
    int need_crc = 1;
 
    if (PNG_CHUNK_ANCILLARY(png_ptr->chunk_name) != 0)
@@ -192,6 +209,9 @@ png_calculate_crc(png_structrp png_ptr, png_const_bytep ptr, size_t length)
 int
 png_user_version_check(png_structrp png_ptr, png_const_charp user_png_ver)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(107);
+#endif
    /* Libpng versions 1.0.0 and later are binary compatible if the version
     * string matches through the second '.'; we must recompile any
     * applications that use any older library version.
@@ -251,6 +271,9 @@ png_create_png_struct,(png_const_charp user_png_ver, png_voidp error_ptr,
     png_error_ptr error_fn, png_error_ptr warn_fn, png_voidp mem_ptr,
     png_malloc_ptr malloc_fn, png_free_ptr free_fn),PNG_ALLOCATED)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(108);
+#endif
    png_struct create_struct;
 #  ifdef PNG_SETJMP_SUPPORTED
       jmp_buf create_jmp_buf;
@@ -353,6 +376,9 @@ png_create_png_struct,(png_const_charp user_png_ver, png_voidp error_ptr,
 PNG_FUNCTION(png_infop,PNGAPI
 png_create_info_struct,(png_const_structrp png_ptr),PNG_ALLOCATED)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(109);
+#endif
    png_inforp info_ptr;
 
    png_debug(1, "in png_create_info_struct");
@@ -385,6 +411,9 @@ png_create_info_struct,(png_const_structrp png_ptr),PNG_ALLOCATED)
 void PNGAPI
 png_destroy_info_struct(png_const_structrp png_ptr, png_infopp info_ptr_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(110);
+#endif
    png_inforp info_ptr = NULL;
 
    png_debug(1, "in png_destroy_info_struct");
@@ -424,6 +453,9 @@ PNG_FUNCTION(void,PNGAPI
 png_info_init_3,(png_infopp ptr_ptr, size_t png_info_struct_size),
     PNG_DEPRECATED)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(111);
+#endif
    png_inforp info_ptr = *ptr_ptr;
 
    png_debug(1, "in png_info_init_3");
@@ -452,6 +484,9 @@ void PNGAPI
 png_data_freer(png_const_structrp png_ptr, png_inforp info_ptr,
     int freer, png_uint_32 mask)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(112);
+#endif
    png_debug(1, "in png_data_freer");
 
    if (png_ptr == NULL || info_ptr == NULL)
@@ -471,6 +506,9 @@ void PNGAPI
 png_free_data(png_const_structrp png_ptr, png_inforp info_ptr, png_uint_32 mask,
     int num)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(113);
+#endif
    png_debug(1, "in png_free_data");
 
    if (png_ptr == NULL || info_ptr == NULL)
@@ -742,6 +780,9 @@ png_save_int_32(png_bytep buf, png_int_32 i)
 int PNGAPI
 png_convert_to_rfc1123_buffer(char out[29], png_const_timep ptime)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(114);
+#endif
    static const char short_months[12][4] =
         {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
@@ -796,6 +837,9 @@ png_convert_to_rfc1123_buffer(char out[29], png_const_timep ptime)
 png_const_charp PNGAPI
 png_convert_to_rfc1123(png_structrp png_ptr, png_const_timep ptime)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(115);
+#endif
    if (png_ptr != NULL)
    {
       /* The only failure above if png_ptr != NULL is from an invalid ptime */
@@ -816,6 +860,9 @@ png_convert_to_rfc1123(png_structrp png_ptr, png_const_timep ptime)
 png_const_charp PNGAPI
 png_get_copyright(png_const_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(116);
+#endif
    PNG_UNUSED(png_ptr)  /* Silence compiler warning about unused png_ptr */
 #ifdef PNG_STRING_COPYRIGHT
    return PNG_STRING_COPYRIGHT
@@ -857,6 +904,9 @@ png_get_header_ver(png_const_structrp png_ptr)
 png_const_charp PNGAPI
 png_get_header_version(png_const_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(117);
+#endif
    /* Returns longer string containing both version and date */
    PNG_UNUSED(png_ptr)  /* Silence compiler warning about unused png_ptr */
 #ifdef __STDC__
@@ -880,6 +930,9 @@ png_get_header_version(png_const_structrp png_ptr)
 void PNGAPI
 png_build_grayscale_palette(int bit_depth, png_colorp palette)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(118);
+#endif
    int num_palette;
    int color_inc;
    int i;
@@ -931,6 +984,9 @@ png_build_grayscale_palette(int bit_depth, png_colorp palette)
 int PNGAPI
 png_handle_as_unknown(png_const_structrp png_ptr, png_const_bytep chunk_name)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(119);
+#endif
    /* Check chunk_name and return "keep" value if it's on the list, else 0 */
    png_const_bytep p, p_end;
 
@@ -1003,6 +1059,9 @@ png_access_version_number(void)
 void /* PRIVATE */
 png_zstream_error(png_structrp png_ptr, int ret)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(120);
+#endif
    /* Translate 'ret' into an appropriate error string, priority is given to the
     * one in zstream if set.  This always returns a string, even in cases like
     * Z_OK or Z_STREAM_END where the error code is a success code.
@@ -1085,6 +1144,9 @@ png_colorspace_check_gamma(png_const_structrp png_ptr,
     *    2: the new gamma value comes from an sRGB chunk
     */
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(121);
+#endif
    png_fixed_point gtest;
 
    if ((colorspace->flags & PNG_COLORSPACE_HAVE_GAMMA) != 0 &&
@@ -1120,6 +1182,9 @@ void /* PRIVATE */
 png_colorspace_set_gamma(png_const_structrp png_ptr,
     png_colorspacerp colorspace, png_fixed_point gAMA)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(122);
+#endif
    /* Changed in libpng-1.5.4 to limit the values to ensure overflow can't
     * occur.  Since the fixed point representation is asymmetrical it is
     * possible for 1/gamma to overflow the limit of 21474 and this means the
@@ -1174,6 +1239,9 @@ png_colorspace_set_gamma(png_const_structrp png_ptr,
 void /* PRIVATE */
 png_colorspace_sync_info(png_const_structrp png_ptr, png_inforp info_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(123);
+#endif
    if ((info_ptr->colorspace.flags & PNG_COLORSPACE_INVALID) != 0)
    {
       /* Everything is invalid */
@@ -1238,6 +1306,9 @@ png_colorspace_sync(png_const_structrp png_ptr, png_inforp info_ptr)
 static int
 png_xy_from_XYZ(png_xy *xy, const png_XYZ *XYZ)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(124);
+#endif
    png_int_32 d, dwhite, whiteX, whiteY;
 
    d = XYZ->red_X + XYZ->red_Y + XYZ->red_Z;
@@ -1281,6 +1352,9 @@ png_xy_from_XYZ(png_xy *xy, const png_XYZ *XYZ)
 static int
 png_XYZ_from_xy(png_XYZ *XYZ, const png_xy *xy)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(125);
+#endif
    png_fixed_point red_inverse, green_inverse, blue_scale;
    png_fixed_point left, right, denominator;
 
@@ -1547,6 +1621,9 @@ png_XYZ_from_xy(png_XYZ *XYZ, const png_xy *xy)
 static int
 png_XYZ_normalize(png_XYZ *XYZ)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(126);
+#endif
    png_int_32 Y;
 
    if (XYZ->red_Y < 0 || XYZ->green_Y < 0 || XYZ->blue_Y < 0 ||
@@ -1597,6 +1674,9 @@ png_XYZ_normalize(png_XYZ *XYZ)
 static int
 png_colorspace_endpoints_match(const png_xy *xy1, const png_xy *xy2, int delta)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(127);
+#endif
    /* Allow an error of +/-0.01 (absolute value) on each chromaticity */
    if (PNG_OUT_OF_RANGE(xy1->whitex, xy2->whitex,delta) ||
        PNG_OUT_OF_RANGE(xy1->whitey, xy2->whitey,delta) ||
@@ -1623,6 +1703,9 @@ png_colorspace_endpoints_match(const png_xy *xy1, const png_xy *xy2, int delta)
 static int
 png_colorspace_check_xy(png_XYZ *XYZ, const png_xy *xy)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(128);
+#endif
    int result;
    png_xy xy_test;
 
@@ -1649,6 +1732,9 @@ png_colorspace_check_xy(png_XYZ *XYZ, const png_xy *xy)
 static int
 png_colorspace_check_XYZ(png_xy *xy, png_XYZ *XYZ)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(129);
+#endif
    int result;
    png_XYZ XYZtemp;
 
@@ -1726,6 +1812,9 @@ int /* PRIVATE */
 png_colorspace_set_chromaticities(png_const_structrp png_ptr,
     png_colorspacerp colorspace, const png_xy *xy, int preferred)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(130);
+#endif
    /* We must check the end points to ensure they are reasonable - in the past
     * color management systems have crashed as a result of getting bogus
     * colorant values, while this isn't the fault of libpng it is the
@@ -1763,6 +1852,9 @@ int /* PRIVATE */
 png_colorspace_set_endpoints(png_const_structrp png_ptr,
     png_colorspacerp colorspace, const png_XYZ *XYZ_in, int preferred)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(131);
+#endif
    png_XYZ XYZ = *XYZ_in;
    png_xy xy;
 
@@ -1829,6 +1921,9 @@ static int
 png_icc_profile_error(png_const_structrp png_ptr, png_colorspacerp colorspace,
     png_const_charp name, png_alloc_size_t value, png_const_charp reason)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(132);
+#endif
    size_t pos;
    char message[196]; /* see below for calculation */
 
@@ -1878,6 +1973,9 @@ int /* PRIVATE */
 png_colorspace_set_sRGB(png_const_structrp png_ptr, png_colorspacerp colorspace,
     int intent)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(133);
+#endif
    /* sRGB sets known gamma, end points and (from the chunk) intent. */
    /* IMPORTANT: these are not necessarily the values found in an ICC profile
     * because ICC profiles store values adapted to a D50 environment; it is

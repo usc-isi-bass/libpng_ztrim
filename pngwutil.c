@@ -1,3 +1,8 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 
 /* pngwutil.c - utilities to write a PNG file
  *
@@ -50,6 +55,9 @@ png_save_uint_16(png_bytep buf, unsigned int i)
 void PNGAPI
 png_write_sig(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(237);
+#endif
    png_byte png_signature[8] = {137, 80, 78, 71, 13, 10, 26, 10};
 
 #ifdef PNG_IO_STATE_SUPPORTED
@@ -73,6 +81,9 @@ static void
 png_write_chunk_header(png_structrp png_ptr, png_uint_32 chunk_name,
     png_uint_32 length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(238);
+#endif
    png_byte buf[8];
 
 #if defined(PNG_DEBUG) && (PNG_DEBUG > 0)
@@ -126,6 +137,9 @@ png_write_chunk_start(png_structrp png_ptr, png_const_bytep chunk_string,
 void PNGAPI
 png_write_chunk_data(png_structrp png_ptr, png_const_bytep data, size_t length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(239);
+#endif
    /* Write the data, and run the CRC over it */
    if (png_ptr == NULL)
       return;
@@ -145,6 +159,9 @@ png_write_chunk_data(png_structrp png_ptr, png_const_bytep data, size_t length)
 void PNGAPI
 png_write_chunk_end(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(240);
+#endif
    png_byte buf[4];
 
    if (png_ptr == NULL) return;
@@ -175,6 +192,9 @@ static void
 png_write_complete_chunk(png_structrp png_ptr, png_uint_32 chunk_name,
     png_const_bytep data, size_t length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(241);
+#endif
    if (png_ptr == NULL)
       return;
 
@@ -203,6 +223,9 @@ png_write_chunk(png_structrp png_ptr, png_const_bytep chunk_string,
 static png_alloc_size_t
 png_image_size(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(242);
+#endif
    /* Only return sizes up to the maximum of a png_uint_32; do this by limiting
     * the width and height used to 15 bits.
     */
@@ -249,6 +272,9 @@ png_image_size(png_structrp png_ptr)
 static void
 optimize_cmf(png_bytep data, png_alloc_size_t data_size)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(243);
+#endif
    /* Optimize the CMF field in the zlib stream.  The resultant zlib stream is
     * still compliant to the stream specification.
     */
@@ -292,6 +318,9 @@ static int
 png_deflate_claim(png_structrp png_ptr, png_uint_32 owner,
     png_alloc_size_t data_size)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(244);
+#endif
    if (png_ptr->zowner != 0)
    {
 #if defined(PNG_WARNINGS_SUPPORTED) || defined(PNG_ERROR_TEXT_SUPPORTED)
@@ -438,6 +467,9 @@ png_deflate_claim(png_structrp png_ptr, png_uint_32 owner,
 void /* PRIVATE */
 png_free_buffer_list(png_structrp png_ptr, png_compression_bufferp *listp)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(245);
+#endif
    png_compression_bufferp list = *listp;
 
    if (list != NULL)
@@ -488,6 +520,9 @@ static int
 png_text_compress(png_structrp png_ptr, png_uint_32 chunk_name,
     compression_state *comp, png_uint_32 prefix_len)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(246);
+#endif
    int ret;
 
    /* To find the length of the output it is necessary to first compress the
@@ -636,6 +671,9 @@ png_text_compress(png_structrp png_ptr, png_uint_32 chunk_name,
 static void
 png_write_compressed_data_out(png_structrp png_ptr, compression_state *comp)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(247);
+#endif
    png_uint_32 output_len = comp->output_len;
    png_const_bytep output = comp->output;
    png_uint_32 avail = (sizeof comp->output);
@@ -673,6 +711,9 @@ png_write_IHDR(png_structrp png_ptr, png_uint_32 width, png_uint_32 height,
     int bit_depth, int color_type, int compression_type, int filter_type,
     int interlace_type)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(248);
+#endif
    png_byte buf[13]; /* Buffer to store the IHDR info */
    int is_invalid_depth;
 
@@ -842,6 +883,9 @@ void /* PRIVATE */
 png_write_PLTE(png_structrp png_ptr, png_const_colorp palette,
     png_uint_32 num_pal)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(249);
+#endif
    png_uint_32 max_palette_length, i;
    png_const_colorp pal_ptr;
    png_byte buf[3];
@@ -931,6 +975,9 @@ void /* PRIVATE */
 png_compress_IDAT(png_structrp png_ptr, png_const_bytep input,
     png_alloc_size_t input_len, int flush)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(250);
+#endif
    if (png_ptr->zowner != png_IDAT)
    {
       /* First time.   Ensure we have a temporary buffer for compression and
@@ -1083,6 +1130,9 @@ png_write_IEND(png_structrp png_ptr)
 void /* PRIVATE */
 png_write_gAMA_fixed(png_structrp png_ptr, png_fixed_point file_gamma)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(251);
+#endif
    png_byte buf[4];
 
    png_debug(1, "in png_write_gAMA");
@@ -1098,6 +1148,9 @@ png_write_gAMA_fixed(png_structrp png_ptr, png_fixed_point file_gamma)
 void /* PRIVATE */
 png_write_sRGB(png_structrp png_ptr, int srgb_intent)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(252);
+#endif
    png_byte buf[1];
 
    png_debug(1, "in png_write_sRGB");
@@ -1117,6 +1170,9 @@ void /* PRIVATE */
 png_write_iCCP(png_structrp png_ptr, png_const_charp name,
     png_const_bytep profile)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(253);
+#endif
    png_uint_32 name_len;
    png_uint_32 profile_len;
    png_byte new_name[81]; /* 1 byte for the compression byte */
@@ -1178,6 +1234,9 @@ png_write_iCCP(png_structrp png_ptr, png_const_charp name,
 void /* PRIVATE */
 png_write_sPLT(png_structrp png_ptr, png_const_sPLT_tp spalette)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(254);
+#endif
    png_uint_32 name_len;
    png_byte new_name[80];
    png_byte entrybuf[10];
@@ -1262,6 +1321,9 @@ png_write_sPLT(png_structrp png_ptr, png_const_sPLT_tp spalette)
 void /* PRIVATE */
 png_write_sBIT(png_structrp png_ptr, png_const_color_8p sbit, int color_type)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(255);
+#endif
    png_byte buf[4];
    size_t size;
 
@@ -1321,6 +1383,9 @@ png_write_sBIT(png_structrp png_ptr, png_const_color_8p sbit, int color_type)
 void /* PRIVATE */
 png_write_cHRM_fixed(png_structrp png_ptr, const png_xy *xy)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(256);
+#endif
    png_byte buf[32];
 
    png_debug(1, "in png_write_cHRM");
@@ -1348,6 +1413,9 @@ void /* PRIVATE */
 png_write_tRNS(png_structrp png_ptr, png_const_bytep trans_alpha,
     png_const_color_16p tran, int num_trans, int color_type)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(257);
+#endif
    png_byte buf[6];
 
    png_debug(1, "in png_write_tRNS");
@@ -1413,6 +1481,9 @@ png_write_tRNS(png_structrp png_ptr, png_const_bytep trans_alpha,
 void /* PRIVATE */
 png_write_bKGD(png_structrp png_ptr, png_const_color_16p back, int color_type)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(258);
+#endif
    png_byte buf[6];
 
    png_debug(1, "in png_write_bKGD");
@@ -1476,6 +1547,9 @@ png_write_bKGD(png_structrp png_ptr, png_const_color_16p back, int color_type)
 void /* PRIVATE */
 png_write_eXIf(png_structrp png_ptr, png_bytep exif, int num_exif)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(259);
+#endif
    int i;
    png_byte buf[1];
 
@@ -1498,6 +1572,9 @@ png_write_eXIf(png_structrp png_ptr, png_bytep exif, int num_exif)
 void /* PRIVATE */
 png_write_hIST(png_structrp png_ptr, png_const_uint_16p hist, int num_hist)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(260);
+#endif
    int i;
    png_byte buf[3];
 
@@ -1530,6 +1607,9 @@ void /* PRIVATE */
 png_write_tEXt(png_structrp png_ptr, png_const_charp key, png_const_charp text,
     size_t text_len)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(261);
+#endif
    png_uint_32 key_len;
    png_byte new_key[80];
 
@@ -1573,6 +1653,9 @@ void /* PRIVATE */
 png_write_zTXt(png_structrp png_ptr, png_const_charp key, png_const_charp text,
     int compression)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(262);
+#endif
    png_uint_32 key_len;
    png_byte new_key[81];
    compression_state comp;
@@ -1624,6 +1707,9 @@ void /* PRIVATE */
 png_write_iTXt(png_structrp png_ptr, int compression, png_const_charp key,
     png_const_charp lang, png_const_charp lang_key, png_const_charp text)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(263);
+#endif
    png_uint_32 key_len, prefix_len;
    size_t lang_len, lang_key_len;
    png_byte new_key[82];
@@ -1724,6 +1810,9 @@ void /* PRIVATE */
 png_write_oFFs(png_structrp png_ptr, png_int_32 x_offset, png_int_32 y_offset,
     int unit_type)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(264);
+#endif
    png_byte buf[9];
 
    png_debug(1, "in png_write_oFFs");
@@ -1745,6 +1834,9 @@ png_write_pCAL(png_structrp png_ptr, png_charp purpose, png_int_32 X0,
     png_int_32 X1, int type, int nparams, png_const_charp units,
     png_charpp params)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(265);
+#endif
    png_uint_32 purpose_len;
    size_t units_len, total_len;
    png_size_tp params_len;
@@ -1809,6 +1901,9 @@ void /* PRIVATE */
 png_write_sCAL_s(png_structrp png_ptr, int unit, png_const_charp width,
     png_const_charp height)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(266);
+#endif
    png_byte buf[64];
    size_t wlen, hlen, total_len;
 
@@ -1840,6 +1935,9 @@ png_write_pHYs(png_structrp png_ptr, png_uint_32 x_pixels_per_unit,
     png_uint_32 y_pixels_per_unit,
     int unit_type)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(267);
+#endif
    png_byte buf[9];
 
    png_debug(1, "in png_write_pHYs");
@@ -1862,6 +1960,9 @@ png_write_pHYs(png_structrp png_ptr, png_uint_32 x_pixels_per_unit,
 void /* PRIVATE */
 png_write_tIME(png_structrp png_ptr, png_const_timep mod_time)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(268);
+#endif
    png_byte buf[7];
 
    png_debug(1, "in png_write_tIME");
@@ -1889,6 +1990,9 @@ png_write_tIME(png_structrp png_ptr, png_const_timep mod_time)
 void /* PRIVATE */
 png_write_start_row(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(269);
+#endif
 #ifdef PNG_WRITE_INTERLACING_SUPPORTED
    /* Arrays to facilitate easy interlacing - use pass (0 - 6) as index */
 
@@ -2004,6 +2108,9 @@ png_write_start_row(png_structrp png_ptr)
 void /* PRIVATE */
 png_write_finish_row(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(270);
+#endif
 #ifdef PNG_WRITE_INTERLACING_SUPPORTED
    /* Arrays to facilitate easy interlacing - use pass (0 - 6) as index */
 
@@ -2095,6 +2202,9 @@ png_write_finish_row(png_structrp png_ptr)
 void /* PRIVATE */
 png_do_write_interlace(png_row_infop row_info, png_bytep row, int pass)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(271);
+#endif
    /* Arrays to facilitate easy interlacing - use pass (0 - 6) as index */
 
    /* Start of interlace block */
@@ -2279,6 +2389,9 @@ static size_t /* PRIVATE */
 png_setup_sub_row(png_structrp png_ptr, png_uint_32 bpp,
     size_t row_bytes, size_t lmins)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(272);
+#endif
    png_bytep rp, dp, lp;
    size_t i;
    size_t sum = 0;
@@ -2318,6 +2431,9 @@ static void /* PRIVATE */
 png_setup_sub_row_only(png_structrp png_ptr, png_uint_32 bpp,
     size_t row_bytes)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(273);
+#endif
    png_bytep rp, dp, lp;
    size_t i;
 
@@ -2339,6 +2455,9 @@ png_setup_sub_row_only(png_structrp png_ptr, png_uint_32 bpp,
 static size_t /* PRIVATE */
 png_setup_up_row(png_structrp png_ptr, size_t row_bytes, size_t lmins)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(274);
+#endif
    png_bytep rp, dp, pp;
    size_t i;
    size_t sum = 0;
@@ -2366,6 +2485,9 @@ png_setup_up_row(png_structrp png_ptr, size_t row_bytes, size_t lmins)
 static void /* PRIVATE */
 png_setup_up_row_only(png_structrp png_ptr, size_t row_bytes)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(275);
+#endif
    png_bytep rp, dp, pp;
    size_t i;
 
@@ -2383,6 +2505,9 @@ static size_t /* PRIVATE */
 png_setup_avg_row(png_structrp png_ptr, png_uint_32 bpp,
     size_t row_bytes, size_t lmins)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(276);
+#endif
    png_bytep rp, dp, pp, lp;
    png_uint_32 i;
    size_t sum = 0;
@@ -2423,6 +2548,9 @@ static void /* PRIVATE */
 png_setup_avg_row_only(png_structrp png_ptr, png_uint_32 bpp,
     size_t row_bytes)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(277);
+#endif
    png_bytep rp, dp, pp, lp;
    png_uint_32 i;
 
@@ -2445,6 +2573,9 @@ static size_t /* PRIVATE */
 png_setup_paeth_row(png_structrp png_ptr, png_uint_32 bpp,
     size_t row_bytes, size_t lmins)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(278);
+#endif
    png_bytep rp, dp, pp, cp, lp;
    size_t i;
    size_t sum = 0;
@@ -2506,6 +2637,9 @@ static void /* PRIVATE */
 png_setup_paeth_row_only(png_structrp png_ptr, png_uint_32 bpp,
     size_t row_bytes)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(279);
+#endif
    png_bytep rp, dp, pp, cp, lp;
    size_t i;
 
@@ -2549,6 +2683,9 @@ png_setup_paeth_row_only(png_structrp png_ptr, png_uint_32 bpp,
 void /* PRIVATE */
 png_write_find_filter(png_structrp png_ptr, png_row_infop row_info)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(280);
+#endif
 #ifndef PNG_WRITE_FILTER_SUPPORTED
    png_write_filtered_row(png_ptr, png_ptr->row_buf, row_info->rowbytes+1);
 #else
@@ -2747,6 +2884,9 @@ static void
 png_write_filtered_row(png_structrp png_ptr, png_bytep filtered_row,
     size_t full_row_length/*includes filter byte*/)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(281);
+#endif
    png_debug(1, "in png_write_filtered_row");
 
    png_debug1(2, "filter = %d", filtered_row[0]);

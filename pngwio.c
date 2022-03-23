@@ -1,3 +1,8 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 
 /* pngwio.c - functions for data output
  *
@@ -32,6 +37,9 @@
 void /* PRIVATE */
 png_write_data(png_structrp png_ptr, png_const_bytep data, size_t length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(218);
+#endif
    /* NOTE: write_data_fn must not change the buffer! */
    if (png_ptr->write_data_fn != NULL )
       (*(png_ptr->write_data_fn))(png_ptr, png_constcast(png_bytep,data),
@@ -50,6 +58,9 @@ png_write_data(png_structrp png_ptr, png_const_bytep data, size_t length)
 void PNGCBAPI
 png_default_write_data(png_structp png_ptr, png_bytep data, size_t length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(219);
+#endif
    size_t check;
 
    if (png_ptr == NULL)
@@ -78,6 +89,9 @@ png_flush(png_structrp png_ptr)
 void PNGCBAPI
 png_default_flush(png_structp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(220);
+#endif
    png_FILE_p io_ptr;
 
    if (png_ptr == NULL)
@@ -122,6 +136,9 @@ void PNGAPI
 png_set_write_fn(png_structrp png_ptr, png_voidp io_ptr,
     png_rw_ptr write_data_fn, png_flush_ptr output_flush_fn)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(221);
+#endif
    if (png_ptr == NULL)
       return;
 

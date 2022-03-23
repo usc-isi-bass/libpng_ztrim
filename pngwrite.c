@@ -1,3 +1,8 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 
 /* pngwrite.c - general routines to write a PNG file
  *
@@ -24,6 +29,9 @@ static void
 write_unknown_chunks(png_structrp png_ptr, png_const_inforp info_ptr,
     unsigned int where)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(1);
+#endif
    if (info_ptr->unknown_chunks_num != 0)
    {
       png_const_unknown_chunkp up;
@@ -83,6 +91,9 @@ write_unknown_chunks(png_structrp png_ptr, png_const_inforp info_ptr,
 void PNGAPI
 png_write_info_before_PLTE(png_structrp png_ptr, png_const_inforp info_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(2);
+#endif
    png_debug(1, "in png_write_info_before_PLTE");
 
    if (png_ptr == NULL || info_ptr == NULL)
@@ -191,6 +202,9 @@ png_write_info_before_PLTE(png_structrp png_ptr, png_const_inforp info_ptr)
 void PNGAPI
 png_write_info(png_structrp png_ptr, png_const_inforp info_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(3);
+#endif
 #if defined(PNG_WRITE_TEXT_SUPPORTED) || defined(PNG_WRITE_sPLT_SUPPORTED)
    int i;
 #endif
@@ -357,6 +371,9 @@ png_write_info(png_structrp png_ptr, png_const_inforp info_ptr)
 void PNGAPI
 png_write_end(png_structrp png_ptr, png_inforp info_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(4);
+#endif
    png_debug(1, "in png_write_end");
 
    if (png_ptr == NULL)
@@ -466,6 +483,9 @@ png_write_end(png_structrp png_ptr, png_inforp info_ptr)
 void PNGAPI
 png_convert_from_struct_tm(png_timep ptime, const struct tm * ttime)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(5);
+#endif
    png_debug(1, "in png_convert_from_struct_tm");
 
    ptime->year = (png_uint_16)(1900 + ttime->tm_year);
@@ -493,6 +513,9 @@ PNG_FUNCTION(png_structp,PNGAPI
 png_create_write_struct,(png_const_charp user_png_ver, png_voidp error_ptr,
     png_error_ptr error_fn, png_error_ptr warn_fn),PNG_ALLOCATED)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(6);
+#endif
 #ifndef PNG_USER_MEM_SUPPORTED
    png_structrp png_ptr = png_create_png_struct(user_png_ver, error_ptr,
        error_fn, warn_fn, NULL, NULL, NULL);
@@ -507,6 +530,9 @@ png_create_write_struct_2,(png_const_charp user_png_ver, png_voidp error_ptr,
     png_error_ptr error_fn, png_error_ptr warn_fn, png_voidp mem_ptr,
     png_malloc_ptr malloc_fn, png_free_ptr free_fn),PNG_ALLOCATED)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(7);
+#endif
    png_structrp png_ptr = png_create_png_struct(user_png_ver, error_ptr,
        error_fn, warn_fn, mem_ptr, malloc_fn, free_fn);
 #endif /* USER_MEM */
@@ -574,6 +600,9 @@ void PNGAPI
 png_write_rows(png_structrp png_ptr, png_bytepp row,
     png_uint_32 num_rows)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(8);
+#endif
    png_uint_32 i; /* row counter */
    png_bytepp rp; /* row pointer */
 
@@ -595,6 +624,9 @@ png_write_rows(png_structrp png_ptr, png_bytepp row,
 void PNGAPI
 png_write_image(png_structrp png_ptr, png_bytepp image)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(9);
+#endif
    png_uint_32 i; /* row index */
    int pass, num_pass; /* pass variables */
    png_bytepp rp; /* points to current row */
@@ -628,6 +660,9 @@ png_write_image(png_structrp png_ptr, png_bytepp image)
 static void
 png_do_write_intrapixel(png_row_infop row_info, png_bytep row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(10);
+#endif
    png_debug(1, "in png_do_write_intrapixel");
 
    if ((row_info->color_type & PNG_COLOR_MASK_COLOR) != 0)
@@ -692,6 +727,9 @@ png_do_write_intrapixel(png_row_infop row_info, png_bytep row)
 void PNGAPI
 png_write_row(png_structrp png_ptr, png_const_bytep row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(11);
+#endif
    /* 1.5.6: moved from png_struct to be a local structure: */
    png_row_info row_info;
 
@@ -914,6 +952,9 @@ png_set_flush(png_structrp png_ptr, int nrows)
 void PNGAPI
 png_write_flush(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(12);
+#endif
    png_debug(1, "in png_write_flush");
 
    if (png_ptr == NULL)
@@ -933,6 +974,9 @@ png_write_flush(png_structrp png_ptr)
 static void
 png_write_destroy(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(13);
+#endif
    png_debug(1, "in png_write_destroy");
 
    /* Free any memory zlib uses */
@@ -973,6 +1017,9 @@ png_write_destroy(png_structrp png_ptr)
 void PNGAPI
 png_destroy_write_struct(png_structpp png_ptr_ptr, png_infopp info_ptr_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(14);
+#endif
    png_debug(1, "in png_destroy_write_struct");
 
    if (png_ptr_ptr != NULL)
@@ -994,6 +1041,9 @@ png_destroy_write_struct(png_structpp png_ptr_ptr, png_infopp info_ptr_ptr)
 void PNGAPI
 png_set_filter(png_structrp png_ptr, int method, int filters)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(15);
+#endif
    png_debug(1, "in png_set_filter");
 
    if (png_ptr == NULL)
@@ -1125,6 +1175,9 @@ png_set_filter_heuristics(png_structrp png_ptr, int heuristic_method,
     int num_weights, png_const_doublep filter_weights,
     png_const_doublep filter_costs)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(16);
+#endif
    PNG_UNUSED(png_ptr)
    PNG_UNUSED(heuristic_method)
    PNG_UNUSED(num_weights)
@@ -1139,6 +1192,9 @@ png_set_filter_heuristics_fixed(png_structrp png_ptr, int heuristic_method,
     int num_weights, png_const_fixed_point_p filter_weights,
     png_const_fixed_point_p filter_costs)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(17);
+#endif
    PNG_UNUSED(png_ptr)
    PNG_UNUSED(heuristic_method)
    PNG_UNUSED(num_weights)
@@ -1174,6 +1230,9 @@ png_set_compression_mem_level(png_structrp png_ptr, int mem_level)
 void PNGAPI
 png_set_compression_strategy(png_structrp png_ptr, int strategy)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(18);
+#endif
    png_debug(1, "in png_set_compression_strategy");
 
    if (png_ptr == NULL)
@@ -1191,6 +1250,9 @@ png_set_compression_strategy(png_structrp png_ptr, int strategy)
 void PNGAPI
 png_set_compression_window_bits(png_structrp png_ptr, int window_bits)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(19);
+#endif
    if (png_ptr == NULL)
       return;
 
@@ -1218,6 +1280,9 @@ png_set_compression_window_bits(png_structrp png_ptr, int window_bits)
 void PNGAPI
 png_set_compression_method(png_structrp png_ptr, int method)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(20);
+#endif
    png_debug(1, "in png_set_compression_method");
 
    if (png_ptr == NULL)
@@ -1274,6 +1339,9 @@ png_set_text_compression_strategy(png_structrp png_ptr, int strategy)
 void PNGAPI
 png_set_text_compression_window_bits(png_structrp png_ptr, int window_bits)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(21);
+#endif
    if (png_ptr == NULL)
       return;
 
@@ -1295,6 +1363,9 @@ png_set_text_compression_window_bits(png_structrp png_ptr, int window_bits)
 void PNGAPI
 png_set_text_compression_method(png_structrp png_ptr, int method)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(22);
+#endif
    png_debug(1, "in png_set_text_compression_method");
 
    if (png_ptr == NULL)
@@ -1322,6 +1393,9 @@ void PNGAPI
 png_set_write_user_transform_fn(png_structrp png_ptr, png_user_transform_ptr
     write_user_transform_fn)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(23);
+#endif
    png_debug(1, "in png_set_write_user_transform_fn");
 
    if (png_ptr == NULL)
@@ -1338,6 +1412,9 @@ void PNGAPI
 png_write_png(png_structrp png_ptr, png_inforp info_ptr,
     int transforms, voidp params)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(24);
+#endif
    if (png_ptr == NULL || info_ptr == NULL)
       return;
 
@@ -1462,6 +1539,9 @@ png_write_png(png_structrp png_ptr, png_inforp info_ptr,
 static int
 png_image_write_init(png_imagep image)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(25);
+#endif
    png_structp png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, image,
        png_safe_error, png_safe_warning);
 
@@ -1522,6 +1602,9 @@ typedef struct
 static int
 png_write_image_16bit(png_voidp argument)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(26);
+#endif
    png_image_write_control *display = png_voidcast(png_image_write_control*,
        argument);
    png_imagep image = display->image;
@@ -1637,6 +1720,9 @@ static png_byte
 png_unpremultiply(png_uint_32 component, png_uint_32 alpha,
     png_uint_32 reciprocal/*from the above macro*/)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(27);
+#endif
    /* The following gives 1.0 for an alpha of 0, which is fine, otherwise if 0/0
     * is represented as some other value there is more likely to be a
     * discontinuity which will probably damage compression when moving from a
@@ -1681,6 +1767,9 @@ png_unpremultiply(png_uint_32 component, png_uint_32 alpha,
 static int
 png_write_image_8bit(png_voidp argument)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(28);
+#endif
    png_image_write_control *display = png_voidcast(png_image_write_control*,
        argument);
    png_imagep image = display->image;
@@ -1778,6 +1867,9 @@ png_write_image_8bit(png_voidp argument)
 static void
 png_image_set_PLTE(png_image_write_control *display)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(29);
+#endif
    png_imagep image = display->image;
    const void *cmap = display->colormap;
    int entries = image->colormap_entries > 256 ? 256 :
@@ -1924,6 +2016,9 @@ png_image_set_PLTE(png_image_write_control *display)
 static int
 png_image_write_main(png_voidp argument)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(30);
+#endif
    png_image_write_control *display = png_voidcast(png_image_write_control*,
        argument);
    png_imagep image = display->image;

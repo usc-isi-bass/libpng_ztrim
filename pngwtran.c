@@ -1,3 +1,8 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 
 /* pngwtran.c - transforms the data in a row for PNG writers
  *
@@ -24,6 +29,9 @@
 static void
 png_do_pack(png_row_infop row_info, png_bytep row, png_uint_32 bit_depth)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(31);
+#endif
    png_debug(1, "in png_do_pack");
 
    if (row_info->bit_depth == 8 &&
@@ -172,6 +180,9 @@ static void
 png_do_shift(png_row_infop row_info, png_bytep row,
     png_const_color_8p bit_depth)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(32);
+#endif
    png_debug(1, "in png_do_shift");
 
    if (row_info->color_type != PNG_COLOR_TYPE_PALETTE)
@@ -309,6 +320,9 @@ png_do_shift(png_row_infop row_info, png_bytep row,
 static void
 png_do_write_swap_alpha(png_row_infop row_info, png_bytep row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(33);
+#endif
    png_debug(1, "in png_do_write_swap_alpha");
 
    {
@@ -403,6 +417,9 @@ png_do_write_swap_alpha(png_row_infop row_info, png_bytep row)
 static void
 png_do_write_invert_alpha(png_row_infop row_info, png_bytep row)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(34);
+#endif
    png_debug(1, "in png_do_write_invert_alpha");
 
    {
@@ -500,6 +517,9 @@ png_do_write_invert_alpha(png_row_infop row_info, png_bytep row)
 void /* PRIVATE */
 png_do_write_transformations(png_structrp png_ptr, png_row_infop row_info)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(35);
+#endif
    png_debug(1, "in png_do_write_transformations");
 
    if (png_ptr == NULL)

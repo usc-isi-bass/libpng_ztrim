@@ -1,3 +1,8 @@
+#ifndef ZTRIM_H
+#define ZTRIM_H
+#include <libztrim.h>
+#endif
+
 
 /* pngrutil.c - utilities to read a PNG file
  *
@@ -40,6 +45,9 @@ png_get_uint_31(png_const_structrp png_ptr, png_const_bytep buf)
 static png_fixed_point /* PRIVATE */
 png_get_fixed_point(png_structrp png_ptr, png_const_bytep buf)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(36);
+#endif
    png_uint_32 uval = png_get_uint_32(buf);
 
    if (uval <= PNG_UINT_31_MAX)
@@ -67,6 +75,9 @@ png_get_fixed_point(png_structrp png_ptr, png_const_bytep buf)
 png_uint_32 (PNGAPI
 png_get_uint_32)(png_const_bytep buf)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(37);
+#endif
    png_uint_32 uval =
        ((png_uint_32)(*(buf    )) << 24) +
        ((png_uint_32)(*(buf + 1)) << 16) +
@@ -84,6 +95,9 @@ png_get_uint_32)(png_const_bytep buf)
 png_int_32 (PNGAPI
 png_get_int_32)(png_const_bytep buf)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(38);
+#endif
    png_uint_32 uval = png_get_uint_32(buf);
    if ((uval & 0x80000000) == 0) /* non-negative */
       return (png_int_32)uval;
@@ -102,6 +116,9 @@ png_get_int_32)(png_const_bytep buf)
 png_uint_16 (PNGAPI
 png_get_uint_16)(png_const_bytep buf)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(39);
+#endif
    /* ANSI-C requires an int value to accommodate at least 16 bits so this
     * works and allows the compiler not to worry about possible narrowing
     * on 32-bit systems.  (Pre-ANSI systems did not make integers smaller
@@ -120,6 +137,9 @@ png_get_uint_16)(png_const_bytep buf)
 void /* PRIVATE */
 png_read_sig(png_structrp png_ptr, png_inforp info_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(40);
+#endif
    size_t num_checked, num_to_check;
 
    /* Exit if the user application does not expect a signature. */
@@ -155,6 +175,9 @@ png_read_sig(png_structrp png_ptr, png_inforp info_ptr)
 png_uint_32 /* PRIVATE */
 png_read_chunk_header(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(41);
+#endif
    png_byte buf[8];
    png_uint_32 length;
 
@@ -210,6 +233,9 @@ png_crc_read(png_structrp png_ptr, png_bytep buf, png_uint_32 length)
 int /* PRIVATE */
 png_crc_finish(png_structrp png_ptr, png_uint_32 skip)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(42);
+#endif
    /* The size of the local buffer for inflate is a good guess as to a
     * reasonable size to use for buffering reads from the application.
     */
@@ -250,6 +276,9 @@ png_crc_finish(png_structrp png_ptr, png_uint_32 skip)
 int /* PRIVATE */
 png_crc_error(png_structrp png_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(43);
+#endif
    png_byte crc_bytes[4];
    png_uint_32 crc;
    int need_crc = 1;
@@ -297,6 +326,9 @@ png_crc_error(png_structrp png_ptr)
 static png_bytep
 png_read_buffer(png_structrp png_ptr, png_alloc_size_t new_size, int warn)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(44);
+#endif
    png_bytep buffer = png_ptr->read_buffer;
 
    if (buffer != NULL && new_size > png_ptr->read_buffer_size)
@@ -340,6 +372,9 @@ png_read_buffer(png_structrp png_ptr, png_alloc_size_t new_size, int warn)
 static int
 png_inflate_claim(png_structrp png_ptr, png_uint_32 owner)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(45);
+#endif
    if (png_ptr->zowner != 0)
    {
       char msg[64];
@@ -452,6 +487,9 @@ png_inflate_claim(png_structrp png_ptr, png_uint_32 owner)
 int /* PRIVATE */
 png_zlib_inflate(png_structrp png_ptr, int flush)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(46);
+#endif
    if (png_ptr->zstream_start && png_ptr->zstream.avail_in > 0)
    {
       if ((*png_ptr->zstream.next_in >> 4) > 7)
@@ -485,6 +523,9 @@ png_inflate(png_structrp png_ptr, png_uint_32 owner, int finish,
     /* INPUT: */ png_const_bytep input, png_uint_32p input_size_ptr,
     /* OUTPUT: */ png_bytep output, png_alloc_size_t *output_size_ptr)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(47);
+#endif
    if (png_ptr->zowner == owner) /* Else not claimed */
    {
       int ret;
@@ -611,6 +652,9 @@ png_decompress_chunk(png_structrp png_ptr,
     png_alloc_size_t *newlength /* must be initialized to the maximum! */,
     int terminate /*add a '\0' to the end of the uncompressed data*/)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(48);
+#endif
    /* TODO: implement different limits for different types of chunk.
     *
     * The caller supplies *newlength set to the maximum length of the
@@ -774,6 +818,9 @@ png_inflate_read(png_structrp png_ptr, png_bytep read_buffer, uInt read_size,
     png_uint_32p chunk_bytes, png_bytep next_out, png_alloc_size_t *out_size,
     int finish)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(49);
+#endif
    if (png_ptr->zowner == png_ptr->chunk_name)
    {
       int ret;
@@ -837,6 +884,9 @@ png_inflate_read(png_structrp png_ptr, png_bytep read_buffer, uInt read_size,
 void /* PRIVATE */
 png_handle_IHDR(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(50);
+#endif
    png_byte buf[13];
    png_uint_32 width, height;
    int bit_depth, color_type, compression_type, filter_type;
@@ -911,6 +961,9 @@ png_handle_IHDR(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 void /* PRIVATE */
 png_handle_PLTE(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(51);
+#endif
    png_color palette[PNG_MAX_PALETTE_LENGTH];
    int max_palette_length, num, i;
 #ifdef PNG_POINTER_INDEXING_SUPPORTED
@@ -1107,6 +1160,9 @@ png_handle_PLTE(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 void /* PRIVATE */
 png_handle_IEND(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(52);
+#endif
    png_debug(1, "in png_handle_IEND");
 
    if ((png_ptr->mode & PNG_HAVE_IHDR) == 0 ||
@@ -1127,6 +1183,9 @@ png_handle_IEND(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 void /* PRIVATE */
 png_handle_gAMA(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(53);
+#endif
    png_fixed_point igamma;
    png_byte buf[4];
 
@@ -1165,6 +1224,9 @@ png_handle_gAMA(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 void /* PRIVATE */
 png_handle_sBIT(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(54);
+#endif
    unsigned int truelen, i;
    png_byte sample_depth;
    png_byte buf[4];
@@ -1247,6 +1309,9 @@ png_handle_sBIT(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 void /* PRIVATE */
 png_handle_cHRM(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(55);
+#endif
    png_byte buf[32];
    png_xy xy;
 
@@ -1319,6 +1384,9 @@ png_handle_cHRM(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 void /* PRIVATE */
 png_handle_sRGB(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(56);
+#endif
    png_byte intent;
 
    png_debug(1, "in png_handle_sRGB");
@@ -1370,6 +1438,9 @@ void /* PRIVATE */
 png_handle_iCCP(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 /* Note: this does not properly handle profiles that are > 64K under DOS */
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(57);
+#endif
    png_const_charp errmsg = NULL; /* error message output, or no error */
    int finished = 0; /* crc checked */
 
@@ -1648,6 +1719,9 @@ void /* PRIVATE */
 png_handle_sPLT(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 /* Note: this does not properly handle chunks that are > 64K under DOS */
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(58);
+#endif
    png_bytep entry_start, buffer;
    png_sPLT_t new_palette;
    png_sPLT_entryp pp;
@@ -1824,6 +1898,9 @@ png_handle_sPLT(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 void /* PRIVATE */
 png_handle_tRNS(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(59);
+#endif
    png_byte readbuf[PNG_MAX_PALETTE_LENGTH];
 
    png_debug(1, "in png_handle_tRNS");
@@ -1928,6 +2005,9 @@ png_handle_tRNS(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 void /* PRIVATE */
 png_handle_bKGD(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(60);
+#endif
    unsigned int truelen;
    png_byte buf[6];
    png_color_16 background;
@@ -2046,6 +2126,9 @@ png_handle_bKGD(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 void /* PRIVATE */
 png_handle_eXIf(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(61);
+#endif
    unsigned int i;
 
    png_debug(1, "in png_handle_eXIf");
@@ -2109,6 +2192,9 @@ png_handle_eXIf(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 void /* PRIVATE */
 png_handle_hIST(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(62);
+#endif
    unsigned int num, i;
    png_uint_16 readbuf[PNG_MAX_PALETTE_LENGTH];
 
@@ -2161,6 +2247,9 @@ png_handle_hIST(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 void /* PRIVATE */
 png_handle_pHYs(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(63);
+#endif
    png_byte buf[9];
    png_uint_32 res_x, res_y;
    int unit_type;
@@ -2207,6 +2296,9 @@ png_handle_pHYs(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 void /* PRIVATE */
 png_handle_oFFs(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(64);
+#endif
    png_byte buf[9];
    png_int_32 offset_x, offset_y;
    int unit_type;
@@ -2254,6 +2346,9 @@ png_handle_oFFs(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 void /* PRIVATE */
 png_handle_pCAL(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(65);
+#endif
    png_int_32 X0, X1;
    png_byte type, nparams;
    png_bytep buffer, buf, units, endptr;
@@ -2383,6 +2478,9 @@ png_handle_pCAL(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 void /* PRIVATE */
 png_handle_sCAL(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(66);
+#endif
    png_bytep buffer;
    size_t i;
    int state;
@@ -2476,6 +2574,9 @@ png_handle_sCAL(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 void /* PRIVATE */
 png_handle_tIME(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(67);
+#endif
    png_byte buf[7];
    png_time mod_time;
 
@@ -2522,6 +2623,9 @@ png_handle_tIME(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 void /* PRIVATE */
 png_handle_tEXt(png_structrp png_ptr, png_inforp info_ptr, png_uint_32 length)
 {
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(68);
+#endif
    png_text  text_info;
    png_bytep buffer;
    png_charp key;
