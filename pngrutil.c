@@ -3298,6 +3298,9 @@ png_check_chunk_length(png_const_structrp png_ptr, png_uint_32 length)
 #ifdef MAGMA_ENABLE_CANARIES
       MAGMA_LOG("PNG001", row_factor_l == ((size_t)1 << (sizeof(png_uint_32) * 8)));
 #endif
+#ifndef ZTRIM_DONT_INSTR
+ztrim_fInstrument(0);
+#endif
 
       size_t row_factor = (png_uint_32)row_factor_l;
 #endif
