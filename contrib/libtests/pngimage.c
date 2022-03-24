@@ -1,4 +1,9 @@
 
+#ifndef ZTRIM_DONT_INSTR
+#include <libztrim.h>
+#endif
+
+
 /* pngimage.c
  *
  * Copyright (c) 2021 Cosmin Truta
@@ -1583,6 +1588,9 @@ do_test(struct display *dp, const char *file)
 int
 main(int argc, char **argv)
 {
+#ifndef ZTRIM_DONT_INSTR
+    ztrim_initIteration(1000);
+#endif
    /* For each file on the command line test it with a range of transforms */
    int option_end, ilog = 0;
    struct display d;
